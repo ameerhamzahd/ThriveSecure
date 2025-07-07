@@ -47,7 +47,7 @@ const Navbar = () => {
         <div>
             <div>
                 <div className='flex fixed top-0 z-50 justify-center w-full'>
-                    <nav className="navbar max-w-6xl mx-auto bg-white rounded-full my-5 shadow-sm px-4">
+                    <nav className="navbar max-w-11/12 mx-auto bg-white rounded-full my-5 shadow-sm px-4">
                         <div className="navbar-start">
                             <div className="dropdown relative">
                                 <label tabIndex={0} className="btn btn-ghost lg:hidden">
