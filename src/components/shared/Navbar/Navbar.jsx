@@ -3,7 +3,7 @@ import useAuth from '../../../hooks/useAuth/useAuth'
 import { toast, Bounce } from 'react-toastify';
 import { Link, NavLink } from 'react-router';
 import logo from '../../../assets/logo.png'
-import { TbLogin2 } from 'react-icons/tb';
+import { TbLogin2, TbLogout2 } from 'react-icons/tb';
 
 const Navbar = () => {
 
@@ -84,7 +84,7 @@ const Navbar = () => {
                                     <div className="dropdown dropdown-end relative px-2">
                                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                             <div className="w-10 rounded-full ring ring-blue-800 ring-offset-base-100 ring-offset-2">
-                                                {/* <img src={user?.photoURL || userAvatar} alt="User Avatar" /> */}
+                                                <img src={user?.photoURL} alt="User Avatar" />
                                             </div>
                                         </label>
                                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[60] p-2 shadow bg-white rounded-box w-52 text-blue-800 gap-2">

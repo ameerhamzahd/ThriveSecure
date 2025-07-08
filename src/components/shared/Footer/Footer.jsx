@@ -15,7 +15,6 @@ const Footer = () => {
         <li><NavLink to="/" className={navLinkStyle}>Home</NavLink></li>
         <li><NavLink to="/all-policies" className={navLinkStyle}>All Policies</NavLink></li>
         <li><NavLink to="/agents" className={navLinkStyle}>Agents</NavLink></li>
-        <li><NavLink to="/faqs" className={navLinkStyle}>FAQs</NavLink></li>
         {
             user && <li><NavLink to="/dashboard" className={navLinkStyle}>Dashboard</NavLink></li>
         }
@@ -25,10 +24,11 @@ const Footer = () => {
         <li><NavLink to="/about-us" className={navLinkStyle}>About Us</NavLink></li>
         <li><NavLink to="/articles" className={navLinkStyle}>Articles</NavLink></li>
         <li><NavLink to="/contact-us" className={navLinkStyle}>Contact Us</NavLink></li>
+        <li><NavLink to="/faqs" className={navLinkStyle}>FAQs</NavLink></li>
     </>;
 
     const legal = <>
-        <li><NavLink to="/terms-of-use" className={navLinkStyle}>Terms of Use</NavLink></li>
+        <li><NavLink to="/terms-of-use" className={navLinkStyle}>Terms of Service</NavLink></li>
         <li><NavLink to="/privacy-policy" className={navLinkStyle}>Privacy Policy</NavLink></li>
         <li><NavLink to="/cookie-policy" className={navLinkStyle}>Cookie Policy</NavLink></li>
     </>;

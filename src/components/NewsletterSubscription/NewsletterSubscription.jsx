@@ -91,7 +91,7 @@ const NewsletterSubscription = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-br from-blue-800 to-accent backdrop-blur-lg rounded-3xl p-8 lg:p-10 border border-white/20">
+            <div className="bg-blue-800 backdrop-blur-lg rounded-3xl p-8 lg:p-10 border border-white/20">
               {!isSuccess ? (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Name Field */}
@@ -99,7 +99,7 @@ const NewsletterSubscription = () => {
                     <label htmlFor="name" className="block text-white font-medium mb-2">Full Name</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none ">
-                        <FaUser className="w-5 h-5 text-white/60" />
+                        <FaUser className="w-5 h-5 text-accent" />
                       </div>
                       <motion.input
                         type="text"
@@ -121,7 +121,7 @@ const NewsletterSubscription = () => {
                     <label htmlFor="email" className="block text-white font-medium mb-2">Email Address</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <FaEnvelope className="w-5 h-5 text-white/60" />
+                        <FaEnvelope className="w-5 h-5 text-accent" />
                       </div>
                       <motion.input
                         type="email"
