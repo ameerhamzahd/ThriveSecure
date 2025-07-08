@@ -61,7 +61,8 @@ const Navbar = () => {
                             </div>
 
                             <Link to="/" className="text-xl font-bold flex items-center gap-2">
-                                <img className="w-10 h-10" src={logo} alt="Logo" />ThriveSecure
+                                <img className="w-10 h-10" src={logo} alt="Logo" />
+                                <p className='hidden md:flex'>ThriveSecure</p>
                             </Link>
                         </div>
 
@@ -87,9 +88,11 @@ const Navbar = () => {
                                                 <img src={user?.photoURL} alt="User Avatar" />
                                             </div>
                                         </label>
-                                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[60] p-2 shadow bg-white rounded-box w-52 text-blue-800 gap-2">
-                                            <li><Link onClick={handleLogout} className='flex items-center justify-center gap-1 border border-blue-800 text-black'><TbLogout2 size={20} />Logout</Link></li>
-                                        </ul>
+                                    </div>
+                                    <div className='gap-3 justify-center items-center px-2 md:flex'>
+                                        <Link onClick={handleLogout} className="flex gap-2 items-center px-6 bg-transparent btn hover:border-blue-800">
+                                        <TbLogout2 size={20} />Logout
+                                        </Link>
                                     </div>
                                 </>
                                 ) : (
