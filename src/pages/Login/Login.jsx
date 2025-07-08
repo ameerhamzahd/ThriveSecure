@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa6";
-import regLottie from "../../assets/login.json";
+import loginLottie from "../../assets/login.json";
 import Lottie from "lottie-react";
 import { useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth/useAuth";
 import { toast, Bounce } from "react-toastify";
 import useAxios from "../../hooks/useAxios/useAxios";
+import { motion } from 'motion/react';
 
 const Login = () => {
     const { googleLogin, loginUser, setUser } = useAuth();
@@ -69,8 +70,8 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-24">
-            <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-30">
+            <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Login Form */}
                 <div className="w-full max-w-md mx-auto">
                     <div className="bg-white rounded-2xl shadow border border-gray-100 p-8">
@@ -167,9 +168,18 @@ const Login = () => {
                 </div>
 
                 {/* Lottie Animation */}
-                <div className="hidden lg:flex items-center justify-center">
-                    <Lottie style={{ width: "400px" }} animationData={regLottie} loop />
-                </div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6 }}
+                    className="w-full flex justify-center items-center"
+                >
+                    <Lottie
+                        style={{ width: "600px" }}
+                        animationData={loginLottie}
+                        loop
+                    />
+                </motion.div>
             </div>
         </div>
     );

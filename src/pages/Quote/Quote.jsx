@@ -32,8 +32,8 @@ const Quote = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-24">
-            <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-10 justify-items-center">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-30">
+            <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Left: QuoteEstimator Form */}
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
                     className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg">
@@ -75,9 +75,18 @@ const Quote = () => {
                 </motion.div>
 
                 {/* Right: Lottie Animation */}
-                <div className="hidden lg:flex items-center justify-center">
-                    <Lottie style={{ width: "400px" }} animationData={quoteLottie} loop />
-                </div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6 }}
+                    className="w-full flex justify-center items-center"
+                >
+                    <Lottie
+                        style={{ width: "600px" }}
+                        animationData={quoteLottie}
+                        loop
+                    />
+                </motion.div>
             </div>
         </div>
     );

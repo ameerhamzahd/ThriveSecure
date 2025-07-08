@@ -6,6 +6,7 @@ import NotFound from '../pages/NotFound/NotFound';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Quote from '../pages/Quote/Quote';
+import Application from '../pages/Application/Application';
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ export const router = createBrowserRouter([
       {
         path: "quote",
         Component: Quote
-      }
+      },
+      {
+        path: "application",
+        Component: Application
+      },
     ]
   },
 ]);
