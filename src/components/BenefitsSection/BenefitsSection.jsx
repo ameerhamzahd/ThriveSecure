@@ -84,14 +84,7 @@ const responsive = {
 
 const BenefitsSection = () => {
     return (
-        <section className="pt-16 lg:pt-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-            {/* Background Decorations */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-                <div className="absolute top-20 left-10 w-32 h-32 bg-blue-800/5 rounded-full blur-xl"></div>
-                <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/5 rounded-full blur-xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-800/3 to-accent/3 rounded-full blur-3xl"></div>
-            </div>
-
+        <section className="pt-16 lg:pt-24 bg-white relative overflow-hidden">
             <div className="max-w-11/12 mx-auto relative z-10">
                 {/* Section Header */}
                 <motion.div
@@ -109,7 +102,7 @@ const BenefitsSection = () => {
                         viewport={{ once: true }}
                     >
                         Benefits of{" "}
-                        <span className="bg-gradient-to-r from-blue-800 to-accent bg-clip-text text-transparent">LifeSure</span>
+                        <span className="bg-gradient-to-r from-blue-800 to-accent bg-clip-text text-transparent">ThriveSecure</span>
                     </motion.h2>
                     <motion.p
                         className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto"
@@ -157,8 +150,6 @@ const BenefitsSection = () => {
                             >
                                 <motion.div
                                     className="group relative bg-white rounded-2xl shadow-lg  transition-all duration-500 overflow-hidden h-full"
-                                    whileHover={{ y: -8, scale: 1.02 }}
-                                    transition={{ duration: 0.3 }}
                                 >
                                     {/* Gradient Background */}
                                     <div
@@ -170,7 +161,7 @@ const BenefitsSection = () => {
                                         {/* Icon */}
                                         <motion.div
                                             className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${benefit.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                                            whileHover={{ rotate: 5 }}
+                                            whileHover={{ rotate: 5 }} 
                                         >
                                             <benefit.icon className="w-8 h-8 text-white" />
                                         </motion.div>
@@ -203,9 +194,6 @@ const BenefitsSection = () => {
                                         </ul>
                                     </div>
 
-                                    {/* Decorative Elements */}
-                                    <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 rounded-full blur-xl"></div>
-                                    <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-br from-white/10 to-white/5 rounded-full blur-lg"></div>
                                 </motion.div>
                             </motion.div>
                         ))}

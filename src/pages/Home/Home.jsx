@@ -1,6 +1,7 @@
 import React from 'react';
 import BannerSlider from '../../components/BannerSlider/BannerSlider';
 import BenefitsSection from '../../components/BenefitsSection/BenefitsSection';
+import NewsletterSubscription from '../../components/NewsletterSubscription/NewsletterSubscription';
 
 const Home = () => {
     return (
@@ -11,6 +12,10 @@ const Home = () => {
 
             <div>
                 <BenefitsSection></BenefitsSection>
+            </div>
+
+            <div>
+                <NewsletterSubscription></NewsletterSubscription>
             </div>
         </div>
     );
