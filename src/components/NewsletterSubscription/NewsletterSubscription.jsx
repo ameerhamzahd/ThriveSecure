@@ -91,12 +91,12 @@ const NewsletterSubscription = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-blue-800 backdrop-blur-lg rounded-3xl p-8 lg:p-10 border border-white/20">
+            <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-blue-50 backdrop-blur-lg rounded-3xl p-8 lg:p-10 border border-white/20">
               {!isSuccess ? (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Name Field */}
                   <div>
-                    <label htmlFor="name" className="block text-white font-medium mb-2">Full Name</label>
+                    <label htmlFor="name" className="block  font-medium mb-2">Full Name</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none ">
                         <FaUser className="w-5 h-5 text-accent" />
@@ -108,7 +108,7 @@ const NewsletterSubscription = () => {
                           required: "Name is required",
                           minLength: { value: 2, message: "Name must be at least 2 characters" },
                         })}
-                        className="w-full pl-12 pr-4 py-4 border border-white/30 rounded-xl text-white/60 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                        className="w-full pl-12 pr-4 py-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
                         placeholder="Enter your full name"
                         whileFocus={{ scale: 1.02 }}
                       />
@@ -118,7 +118,7 @@ const NewsletterSubscription = () => {
 
                   {/* Email Field */}
                   <div>
-                    <label htmlFor="email" className="block text-white font-medium mb-2">Email Address</label>
+                    <label htmlFor="email" className="block  font-medium mb-2">Email Address</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <FaEnvelope className="w-5 h-5 text-accent" />
@@ -129,7 +129,7 @@ const NewsletterSubscription = () => {
                         {...register("email", {
                           required: "Email is required",
                         })}
-                        className="w-full pl-12 pr-4 py-4 border border-white/30 rounded-xl text-white/60 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                        className="w-full pl-12 pr-4 py-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
                         placeholder="Enter your email address"
                         whileFocus={{ scale: 1.02 }}
                       />
@@ -141,7 +141,7 @@ const NewsletterSubscription = () => {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-accent hover:bg-accent/90 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-lg hover:scale-105 cursor-pointer"
+                    className="w-full bg-accent hover:bg-accent/90  py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-lg hover:scale-105 cursor-pointer"
                   >
                     {isSubmitting ? (
                       <>
@@ -160,7 +160,7 @@ const NewsletterSubscription = () => {
                     )}
                   </motion.button>
                   {error && <p className="text-red-200 text-center">{error}</p>}
-                  <p className="text-white/70 text-sm text-center mt-2">We respect your privacy. Unsubscribe at any time.</p>
+                  <p className="/70 text-sm text-center mt-2">We respect your privacy. Unsubscribe at any time.</p>
                 </form>
               ) : (
                 <motion.div
@@ -172,8 +172,8 @@ const NewsletterSubscription = () => {
                   <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500/20 rounded-full mb-6">
                     <FaCheck className="w-10 h-10 text-green-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Successfully Subscribed!</h3>
-                  <p className="text-white/80 mb-6">
+                  <h3 className="text-2xl font-bold  mb-4">Successfully Subscribed!</h3>
+                  <p className="/80 mb-6">
                     Thank you for subscribing to our newsletter. You'll receive the latest updates and exclusive offers.
                   </p>
                   <button

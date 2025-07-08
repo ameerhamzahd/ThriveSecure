@@ -5,6 +5,7 @@ import Home from '../pages/Home/Home';
 import NotFound from '../pages/NotFound/NotFound';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
+import Quote from '../pages/Quote/Quote';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register
+      },
+      {
+        path: "quote",
+        Component: Quote
       }
     ]
   },
