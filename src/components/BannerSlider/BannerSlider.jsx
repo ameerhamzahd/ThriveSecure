@@ -1,5 +1,5 @@
 import { Navigation, Pagination, Autoplay } from "swiper/modules"
-import { FaChevronRight } from "react-icons/fa"
+import { FaArrowRight } from "react-icons/fa"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
@@ -124,8 +124,9 @@ const BannerSlider = () => {
 
                                             {/* Buttons */}
                                             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                                                <button className="btn btn-accent flex gap-2 items-center px-6 text-black">
-                                                    Get a Free Quote <FaChevronRight />
+                                                <button className="group bg-accent hover:bg-accent/90 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 hover:shadow-lg hover:scale-105 w-full sm:w-auto cursor-pointer">
+                                                    <span>Get a Free Qoute</span>
+                                                    <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                                                 </button>
                                             </div>
                                         </div>

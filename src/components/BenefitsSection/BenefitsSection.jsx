@@ -84,7 +84,7 @@ const responsive = {
 
 const BenefitsSection = () => {
     return (
-        <section className="pt-16 lg:pt-24 bg-white relative overflow-hidden">
+        <section className="pt-15 lg:pt-20 bg-white relative overflow-hidden">
             <div className="max-w-11/12 mx-auto relative z-10">
                 {/* Section Header */}
                 <motion.div
@@ -132,12 +132,22 @@ const BenefitsSection = () => {
                         customTransition="transform 300ms ease-in-out"
                         transitionDuration={300}
                         className='py-12 lg:py-16'
-                        removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
+                        removeArrowOnDeviceType={["tablet", "mobile"]}
                         dotListClass="custom-dot-list-style"
                         itemClass="carousel-item-padding-40-px"
                         arrows={true}
                         showDots={true}
                         renderDotsOutside={true}
+                        customLeftArrow={
+                            <button className="absolute left-0 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-blue-800 hover:bg-blue-800 hover:text-white transition-all duration-300 z-10 cursor-pointer">
+                              <FaArrowRight className="w-5 h-5 rotate-180" />
+                            </button>
+                          }
+                          customRightArrow={
+                            <button className="absolute right-0 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-blue-800 hover:bg-blue-800 hover:text-white transition-all duration-300 z-10 cursor-pointer">
+                              <FaArrowRight className="w-5 h-5" />
+                            </button>
+                          }
                     >
                         {benefits.map((benefit, index) => (
                             <motion.div

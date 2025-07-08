@@ -31,7 +31,7 @@ const NewsletterSubscription = () => {
   };
 
   return (
-    <section className="pt-16 lg:pt-24 bg-white relative overflow-hidden">
+    <section className="pt-15 lg:pt-20 bg-white relative overflow-hidden">
       {/* Background Animated Grid Decorations */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -91,7 +91,7 @@ const NewsletterSubscription = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-br from-blue-800 to-accent backdrop-blur-lg rounded-3xl p-8 lg:p-10 border border-white/20 shadow-2xl">
+            <div className="bg-gradient-to-br from-blue-800 to-accent backdrop-blur-lg rounded-3xl p-8 lg:p-10 border border-white/20">
               {!isSuccess ? (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Name Field */}
@@ -128,10 +128,6 @@ const NewsletterSubscription = () => {
                         id="email"
                         {...register("email", {
                           required: "Email is required",
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$/i,
-                            message: "Invalid email address",
-                          },
                         })}
                         className="w-full pl-12 pr-4 py-4 border border-white/30 rounded-xl text-white/60 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
                         placeholder="Enter your email address"
@@ -145,9 +141,7 @@ const NewsletterSubscription = () => {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-3"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-accent hover:bg-accent/90 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-lg hover:scale-105 cursor-pointer"
                   >
                     {isSubmitting ? (
                       <>
