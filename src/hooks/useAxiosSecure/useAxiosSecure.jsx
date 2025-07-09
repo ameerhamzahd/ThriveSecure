@@ -1,12 +1,10 @@
 import axios from 'axios';
-import React from 'react';
 import useAuth from '../useAuth/useAuth';
 import { useNavigate } from 'react-router';
 
-
 const axiosSecure = axios.create({
     baseURL: `http://localhost:3000/`
-})
+});
 
 const useAxiosSecure = () => {
     const { user, logoutUser } = useAuth();
@@ -14,7 +12,9 @@ const useAxiosSecure = () => {
 
     axiosSecure.interceptors.request.use(
         (config) => {
-            config.headers.authorization = `Bearer ${user.accessToken}`;
+            if (user?.accessToken) {
+                config.headers.authorization = `Bearer ${user.accessToken}`;
+            }
             return config;
         },
         (error) => {
@@ -23,22 +23,16 @@ const useAxiosSecure = () => {
     );
 
     axiosSecure.interceptors.response.use(
-        res => {
-            return res;
-        },
+        res => res,
         error => {
-            const status = error.status;
+            const status = error.response?.status; // ✅ Correct status retrieval
             if (status === 403) {
                 navigate("/forbidden");
-            }
-            else if (status === 401) {
+            } else if (status === 401) {
                 logoutUser()
-                .then(() => {
-                        navigate("/login")
-                    })
-                    .catch(() => {})
+                    .then(() => navigate("/login"))
+                    .catch(() => {});
             }
-
             return Promise.reject(error);
         }
     );
