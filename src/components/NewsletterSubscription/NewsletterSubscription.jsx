@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import { motion } from "motion/react"
 import { useState } from "react";
 import { FaEnvelope, FaUser, FaArrowRight, FaCheck, FaBell } from "react-icons/fa";
+import useAxios from "../../hooks/useAxios/useAxios";
 
 const NewsletterSubscription = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
+  const axiosInstance = useAxios();
 
   const {
     register,
@@ -18,16 +20,26 @@ const NewsletterSubscription = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     setError("");
-    // try {
-    //   // Simulate API call
-    //   await new Promise((resolve) => setTimeout(resolve, 1500));
-    //   setIsSuccess(true);
-    //   reset();
-    // } catch {
-    //   setError("Subscription failed. Please try again.");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      const subscriptionData = {
+        name: data.name,
+        email: data.email,
+        subscribedAt: new Date().toISOString(),
+      };
+
+      const res = await axiosInstance.post("/newsletter-subscriptions", subscriptionData);
+
+      if (res.data.insertedId || res.data.success) {
+        setIsSuccess(true);
+        reset();
+      } else {
+        setError("Subscription failed. Please try again.");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Subscription failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -178,7 +190,7 @@ const NewsletterSubscription = () => {
                   </p>
                   <button
                     onClick={() => setIsSuccess(false)}
-                    className="text-accent hover:text-accent/80 font-medium transition-colors duration-300"
+                    className="text-accent hover:text-accent/80 font-medium transition-colors duration-300 cursor-pointer hover:underline"
                   >
                     Subscribe Another Email
                   </button>
