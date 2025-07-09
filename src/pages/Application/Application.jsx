@@ -63,11 +63,7 @@ const Application = () => {
         <div className="min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center pt-30 bg-white gap-10">
             <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Form */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl"
+                <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-blue-50 backdrop-blur-lg shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl"
                 >
                     <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4">Life Insurance Application</h1>
                     <p className="text-gray-600 text-center mb-6 text-sm sm:text-base">Fill in your details to apply for your policy</p>
@@ -228,26 +224,21 @@ const Application = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="btn bg-blue-800 text-white w-full hover:bg-blue-700"
+                            className="btn bg-blue-800 text-white w-full hover:opacity-80"
                         >
                             {isSubmitting ? "Submitting..." : "Submit Application"}
                         </button>
                     </form>
-                </motion.div>
+                </div>
 
                 {/* Lottie Animation */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-full flex justify-center items-center"
-                >
+                <div className="hidden w-full lg:flex justify-center items-center">
                     <Lottie
                         animationData={applicationLottie}
                         loop
-                        style={{ width: "800px" }}
+                        style={{ width: "600px" }}
                     />
-                </motion.div>
+                </div>
             </div>
         </div>
     );

@@ -98,7 +98,7 @@ const Register = () => {
             <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Registration Form */}
                 <div className="w-full max-w-md mx-auto">
-                    <div className="bg-white rounded-2xl shadow border border-gray-100 p-8">
+                    <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-blue-50 backdrop-blur-lg rounded-2xl shadow border border-gray-100 p-8">
                         <div className="text-center mb-6">
                             <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
                             <p className="text-gray-600">Join us and start your journey today</p>
@@ -221,18 +221,14 @@ const Register = () => {
                 </div>
 
                 {/* Lottie Animation */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-full flex justify-center items-center"
+                <div className="hidden w-full lg:flex justify-center items-center"
                 >
                     <Lottie
                         style={{ width: "600px" }}
                         animationData={regLottie}
                         loop
                     />
-                </motion.div>
+                </div>
             </div>
         </div>
     );

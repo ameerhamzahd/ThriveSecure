@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import { motion } from "motion/react";
-import quoteLottie from "../../assets/quote.json"
+import quoteLottie from "../../assets/quote.json";
 import Lottie from 'lottie-react';
 
 const Quote = () => {
@@ -17,26 +17,47 @@ const Quote = () => {
         base += duration * 10;
         base += smoker === 'yes' ? 200 : 0;
         base += gender === 'male' ? 50 : 0;
-        return base;
+        return Math.round(base); // returns monthly premium
     };
 
+    const formatCurrency = (amount) => `$${amount.toLocaleString()}`;
+
     const onSubmit = (data) => {
-        const premium = calculatePremium({
+        const monthly = calculatePremium({
             age: parseInt(data.age),
             gender: data.gender,
             coverage: parseInt(data.coverage),
             duration: parseInt(data.duration),
             smoker: data.smoker
         });
-        toast.info(`Estimated Premium: ৳${premium}/month`, { position: "top-center" });
+
+        const weekly = Math.round(monthly / 4);
+        const yearly = Math.round(monthly * 12);
+
+        Swal.fire({
+            title: "Estimated Premiums",
+            html: `
+                <div class="text-lg">
+                    <p><strong>Weekly:</strong> ${formatCurrency(weekly)}/week</p>
+                    <p><strong>Monthly:</strong> ${formatCurrency(monthly)}/month</p>
+                    <p><strong>Yearly:</strong> ${formatCurrency(yearly)}/year</p>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">* Estimates may vary depending on additional factors during application.</p>
+            `,
+            icon: "info",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#1e40af",
+            background: "#ffffff"
+        });
     };
 
     return (
-        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-30">
-            <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
-                {/* Left: QuoteEstimator Form */}
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-                    className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-28">
+            <div className="w-full max-w-11/12 grid lg:grid-cols-2 gap-10 justify-items-center">
+
+                {/* QuoteEstimator Form */}
+                <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-blue-50 backdrop-blur-lg shadow-xl rounded-2xl p-8 w-full max-w-lg"
+                >
                     <h1 className="text-2xl font-bold text-center mb-4">Get Your Free Life Insurance Quote</h1>
                     <p className="text-gray-600 text-center mb-6">Estimate your premium easily before applying</p>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -53,9 +74,9 @@ const Quote = () => {
                             </select>
                         </div>
                         <div>
-                            <label className="block mb-1 font-medium">Coverage Amount (৳)</label>
+                            <label className="block mb-1 font-medium">Coverage Amount ($)</label>
                             <input type="number" className="input input-bordered w-full" {...register("coverage", { required: true, min: 50000 })} />
-                            {errors.coverage && <span className="text-red-500 text-sm">Minimum coverage is ৳50,000.</span>}
+                            {errors.coverage && <span className="text-red-500 text-sm">Minimum coverage is $50,000.</span>}
                         </div>
                         <div>
                             <label className="block mb-1 font-medium">Duration (Years)</label>
@@ -69,24 +90,20 @@ const Quote = () => {
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
-                        <button type="submit" className="btn bg-blue-800 text-white w-full hover:bg-blue-700">Estimate Premium</button>
-                        <button type="button" onClick={() => navigate('/apply-policy')} className="btn btn-outline btn-accent w-full mt-2">Apply for Policy</button>
+                        <button type="submit" className="btn bg-blue-800 text-white w-full hover:opacity-80">Estimate Premium</button>
+                        <button type="button" onClick={() => navigate('/application')} className="btn btn-outline btn-accent w-full mt-2">Apply for Policy</button>
                     </form>
-                </motion.div>
+                </div>
 
-                {/* Right: Lottie Animation */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-full flex justify-center items-center"
+                {/* Lottie Animation */}
+                <div className="hidden w-full lg:flex justify-center items-center"
                 >
                     <Lottie
                         style={{ width: "600px" }}
                         animationData={quoteLottie}
                         loop
                     />
-                </motion.div>
+                </div>
             </div>
         </div>
     );
