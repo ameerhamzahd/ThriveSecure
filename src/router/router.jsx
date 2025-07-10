@@ -13,6 +13,7 @@ import PaymentGateway from '../pages/Dashboard/Customer/PaymentGateway/PaymentGa
 import ManageApplications from '../pages/Dashboard/Admin/ManageApplications/ManageApplications';
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers';
 import ManagePolicies from '../pages/Dashboard/Admin/ManagePolicies/ManagePolicies';
+import ManageTransactions from '../pages/Dashboard/Admin/ManageTransactions/ManageTransactions';
 
 export const router = createBrowserRouter([
   {
@@ -68,7 +69,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-transactions",
-        Component: PaymentGateway
+        Component: ManageTransactions
       },
       {
         path: "manage-agents",
