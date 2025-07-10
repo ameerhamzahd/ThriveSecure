@@ -12,6 +12,7 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import PaymentGateway from '../pages/Dashboard/Customer/PaymentGateway/PaymentGateway';
 import ManageApplications from '../pages/Dashboard/Admin/ManageApplications/ManageApplications';
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers';
+import ManagePolicies from '../pages/Dashboard/Admin/ManagePolicies/ManagePolicies';
 
 export const router = createBrowserRouter([
   {
@@ -58,16 +59,12 @@ export const router = createBrowserRouter([
         Component: ManageApplications
       },
       {
-        path: "manage-blogs",
-        Component: PaymentGateway
-      },
-      {
         path: "manage-users",
         Component: ManageUsers
       },
       {
         path: "manage-policies",
-        Component: PaymentGateway
+        Component: ManagePolicies
       },
       {
         path: "manage-transactions",

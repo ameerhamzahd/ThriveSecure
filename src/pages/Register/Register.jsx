@@ -32,16 +32,24 @@ const Register = () => {
         setUploading(true);
         try {
             const formData = new FormData();
-            formData.append('image', image);
-            const res = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imageUploadKey}`, formData);
-            setUploadedPhotoURL(res.data.data.url);
+            formData.append('file', image); // ✅ Correct key
+            formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+    
+            const res = await axios.post(
+                `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+                formData
+            );
+    
+            setUploadedPhotoURL(res.data.secure_url); // ✅ Correct value
             toast.success("Photo uploaded successfully!", { transition: Bounce });
         } catch (error) {
+            console.error("Upload error:", error);
             toast.error("Failed to upload photo.", { transition: Bounce });
         } finally {
             setUploading(false);
         }
     };
+    
 
     const onSubmit = async (data) => {
         try {
