@@ -11,7 +11,7 @@ import axios from "axios";
 import { motion } from 'motion/react';
 
 const Register = () => {
-    const { googleLogin, createUser, updateUser, setUser } = useAuth();
+    const { googleLogin, createUser, updateUser } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [uploadedPhotoURL, setUploadedPhotoURL] = useState("");
@@ -106,7 +106,7 @@ const Register = () => {
             <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Registration Form */}
                 <div className="w-full max-w-md mx-auto">
-                    <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-blue-50 backdrop-blur-lg rounded-2xl shadow border border-gray-100 p-8">
+                    <div className="bg-white rounded-2xl shadow border border-gray-100 p-8">
                         <div className="text-center mb-6">
                             <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
                             <p className="text-gray-600">Join us and start your journey today</p>

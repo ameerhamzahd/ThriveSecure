@@ -14,6 +14,8 @@ import ManageApplications from '../pages/Dashboard/Admin/ManageApplications/Mana
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers';
 import ManagePolicies from '../pages/Dashboard/Admin/ManagePolicies/ManagePolicies';
 import ManageTransactions from '../pages/Dashboard/Admin/ManageTransactions/ManageTransactions';
+import ManageAgents from '../pages/Dashboard/Admin/ManageAgents/ManageAgents';
+import PolicyQuote from '../pages/Quote/PolicyQuote/PolicyQuote';
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "quote",
         Component: Quote
+      },
+      {
+        path: "policy-quote",
+        Component: PolicyQuote
       },
       {
         path: "application",
@@ -73,7 +79,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-agents",
-        Component: PaymentGateway
+        Component: ManageAgents
       },
       {
         path: "assigned-customers",

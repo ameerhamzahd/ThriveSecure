@@ -64,7 +64,7 @@ const Application = () => {
         <div className="min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center pt-30 bg-white gap-10">
             <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Form */}
-                <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-blue-50 backdrop-blur-lg shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl"
+                <div className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl"
                 >
                     <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4">Life Insurance Application</h1>
                     <p className="text-gray-600 text-center mb-6 text-sm sm:text-base">Fill in your details to apply for your policy</p>
@@ -232,10 +232,15 @@ const Application = () => {
                         >
                             {isSubmitting ? "Submitting..." : "Submit Application"}
                         </button>
+
+                        <StepProgress currentStep={2} />
                     </form>
                 </div>
 
-                <StepProgress currentStep={2} />
+                {/* Right: Lottie Animation */}
+                <div className="hidden lg:flex items-center justify-center">
+                    <Lottie style={{ width: "600px" }} animationData={applicationLottie} loop />
+                </div>
             </div>
 
 

@@ -10,15 +10,16 @@ const steps = [
 
 const StepProgress = ({ currentStep }) => {
     return (
-        <div className="flex flex-col items-center w-full max-w-xs mx-auto pt-8">
+        <div className="flex items-center justify-center w-full max-w-2xl mx-auto pt-8">
             {steps.map((step, index) => {
                 const isCompleted = step.id < currentStep;
                 const isCurrent = step.id === currentStep;
                 const isLast = index === steps.length - 1;
 
                 return (
-                    <div key={step.id} className="flex flex-col items-center">
-                        <div className="flex items-center justify-center">
+                    <div key={step.id} className="flex items-center">
+                        {/* Step Circle and Label */}
+                        <div className="flex flex-col items-center">
                             <div
                                 className={`
                                     w-10 h-10 rounded-full flex items-center justify-center
@@ -30,16 +31,17 @@ const StepProgress = ({ currentStep }) => {
                             >
                                 {isCompleted ? <FaCheck className="text-base" /> : step.id}
                             </div>
-                            <span className={`ml-4 text-sm font-medium ${isCurrent ? "text-blue-700" : "text-gray-600"}`}>
+                            <span className={`mt-2 text-sm font-medium ${isCurrent ? "text-blue-700" : "text-gray-600"}`}>
                                 {step.label}
                             </span>
                         </div>
 
+                        {/* Connector Line */}
                         {!isLast && (
                             <motion.div
-                                className="w-0.5 bg-gray-300"
-                                initial={{ height: 0 }}
-                                animate={{ height: 40 }}
+                                className="h-1 bg-gray-300 mx-4"
+                                initial={{ width: 0 }}
+                                animate={{ width: 50 }}
                                 transition={{ duration: 0.5 }}
                             />
                         )}

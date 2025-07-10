@@ -152,9 +152,9 @@ const PaymentGatewayForm = ({ price, policyId, policyName }) => {
                 )}
 
                 <p className="text-xs text-center text-gray-400">Your payment is securely processed via Stripe.</p>
-            </motion.form>
 
-            <StepProgress currentStep={3} />
+                <StepProgress currentStep={3} />
+            </motion.form>
         </div>
     );
 };

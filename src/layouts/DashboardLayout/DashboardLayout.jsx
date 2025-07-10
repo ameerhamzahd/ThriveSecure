@@ -161,15 +161,6 @@ const DashboardLayout = () => {
                         >
                             {role}
                         </span>
-                        <div className="relative px-2">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full ring ring-blue-800 ring-offset-base-100 ring-offset-2">
-                                    <Link to="/dashboard/profile">
-                                        <img src={user?.photoURL || userAvatar} alt="User Avatar" />
-                                    </Link>
-                                </div>
-                            </label>
-                        </div>
                     </div>
                     {links}
                 </ul>

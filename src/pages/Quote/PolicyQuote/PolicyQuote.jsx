@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { motion } from "motion/react";
-import quoteLottie from "../../assets/quote.json";
+import quoteLottie from "../../../assets/quote.json";
 import Lottie from 'lottie-react';
+import StepProgress from '../../../components/shared/StepProgress/StepProgress';
 
-const Quote = () => {
+const PolicyQuote = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const calculatePremium = ({ age, gender, coverage, duration, smoker }) => {
@@ -90,16 +92,19 @@ const Quote = () => {
                             </select>
                         </div>
                         <button type="submit" className="btn bg-blue-800 text-white w-full hover:opacity-80">Estimate Premium</button>
+                        <button type="button" onClick={() => navigate('/application')} className="btn btn-outline btn-accent w-full mt-2">Apply for Policy</button>
+
+                        <StepProgress currentStep={1} />
                     </form>
                 </div>
 
                 {/* Right: Lottie Animation */}
                 <div className="hidden lg:flex items-center justify-center">
-                    <Lottie style={{ width: "600px" }} animationData={quoteLottie} loop />
+                    <Lottie style={{ width: "400px" }} animationData={quoteLottie} loop />
                 </div>
             </div>
         </div>
     );
 };
 
-export default Quote;
+export default PolicyQuote;
