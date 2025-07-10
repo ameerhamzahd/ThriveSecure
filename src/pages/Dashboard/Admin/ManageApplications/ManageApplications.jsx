@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from "motion/react";
 import { FaUser, FaEnvelope, FaEye, FaUserCheck, FaTimesCircle } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const ManageApplications = () => {

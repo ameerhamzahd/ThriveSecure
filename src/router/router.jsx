@@ -10,7 +10,8 @@ import Quote from '../pages/Quote/Quote';
 import Application from '../pages/Application/Application';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import PaymentGateway from '../pages/Dashboard/Customer/PaymentGateway/PaymentGateway';
-import ManageApplications from '../pages/ManageApplications/ManageApplications';
+import ManageApplications from '../pages/Dashboard/Admin/ManageApplications/ManageApplications';
+import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers';
 
 export const router = createBrowserRouter([
   {
@@ -62,7 +63,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-users",
-        Component: PaymentGateway
+        Component: ManageUsers
       },
       {
         path: "manage-policies",

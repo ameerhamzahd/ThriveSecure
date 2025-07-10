@@ -17,8 +17,11 @@ import {
     MdSupervisorAccount
 } from "react-icons/md";
 import logo from "../../assets/logo.png"
+import userAvatar from "../../assets/user.png"
+import useAuth from '../../hooks/useAuth/useAuth';
 
 const DashboardLayout = () => {
+    const { user } = useAuth()
     const { role, isLoading } = useUserRole();
 
     const navLinkStyle = ({ isActive }) =>
@@ -141,7 +144,7 @@ const DashboardLayout = () => {
                             </svg>
                         </label>
                     </div>
-                    <div className="mx-2 flex-1 px-2 text-xl font-bold">Dashboard</div>
+                    <div className="mx-2 flex-1 px-2 text-lg font-bold">Dashboard</div>
                 </div>
                 {/* Page content here */}
                 <Outlet></Outlet>
@@ -154,14 +157,25 @@ const DashboardLayout = () => {
                 ></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                     {/* Sidebar content here */}
-                    <Link to="/" className="text-xl font-bold flex items-center gap-2">
-                        <img className="w-10 h-10" src={logo} alt="Logo" />
-                        ThriveSecure
+                    <div className="flex items-center gap-2">
+                        <Link to="/" className='flex items-center text-lg font-bold'>
+                            <img className="w-10 h-10" src={logo} alt="Logo" />
+                            ThriveSecure
+                        </Link>
                         <span className={`px-2 py-1 rounded-full text-xs font-bold bg-teal-100 text-blue-800 uppercase`}
                         >
                             {role}
                         </span>
-                    </Link>
+                        <div className="relative px-2">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full ring ring-blue-800 ring-offset-base-100 ring-offset-2">
+                                    <Link to="/dashboard/profile">
+                                        <img src={user?.photoURL || userAvatar} alt="User Avatar" />
+                                    </Link>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                     {links}
                 </ul>
             </div>
