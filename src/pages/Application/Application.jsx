@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import applicationLottie from "../../assets/application.json";
 import useAuth from "../../hooks/useAuth/useAuth";
 import useAxios from "../../hooks/useAxios/useAxios";
+import StepProgress from "../../components/shared/StepProgress/StepProgress";
 
 const Application = () => {
     const { user } = useAuth();
@@ -79,9 +80,10 @@ const Application = () => {
                                     <label className="block mb-1 font-medium">Full Name</label>
                                     <input
                                         type="text"
-                                        value={user?.displayName || ""}
-                                        disabled
-                                        className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+                                        defaultValue={user?.displayName || ""}
+                                        name="fullName"
+                                        className="input input-bordered w-full"
+                                        placeholder="Enter your full name"
                                     />
                                 </div>
 
@@ -90,11 +92,13 @@ const Application = () => {
                                     <label className="block mb-1 font-medium">Email</label>
                                     <input
                                         type="email"
-                                        value={user?.email || ""}
-                                        disabled
-                                        className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+                                        defaultValue={user?.email || ""}
+                                        name="email"
+                                        className="input input-bordered w-full"
+                                        placeholder="Enter your email"
                                     />
                                 </div>
+
 
                                 {/* NID */}
                                 <div>
@@ -231,15 +235,10 @@ const Application = () => {
                     </form>
                 </div>
 
-                {/* Lottie Animation */}
-                <div className="hidden w-full lg:flex justify-center items-center">
-                    <Lottie
-                        animationData={applicationLottie}
-                        loop
-                        style={{ width: "600px" }}
-                    />
-                </div>
+                <StepProgress currentStep={2} />
             </div>
+
+
         </div>
     );
 };

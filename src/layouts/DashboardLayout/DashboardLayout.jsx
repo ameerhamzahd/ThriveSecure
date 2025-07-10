@@ -6,7 +6,6 @@ import {
     MdPerson,
     MdAssignment,
     MdPayment,
-    MdAttachMoney,
     MdRequestQuote,
     MdGroup,
     MdEditNote,
@@ -21,6 +20,100 @@ import logo from "../../assets/logo.png"
 
 const DashboardLayout = () => {
     const { role, isLoading } = useUserRole();
+
+    const navLinkStyle = ({ isActive }) =>
+        `hover:transition-all hover:duration-300 hover:bg-accent ${isActive ? 'text-blue-800 font-bold' : ''
+        }`;
+
+    const links = <>
+        <li>
+            <NavLink to="/" className={navLinkStyle}>
+                <MdHome className="inline mr-2" /> Home
+            </NavLink>
+        </li>
+        <li>
+            <NavLink to="/dashboard/profile" className={navLinkStyle}>
+                <MdPerson className="inline mr-2" /> Profile
+            </NavLink>
+        </li>
+        {/* customer links */}
+        {!isLoading && role === "customer" && (
+            <>
+                <li>
+                    <NavLink to="/dashboard/my-policies" className={navLinkStyle}>
+                        <MdAssignment className="inline mr-2" /> My Policies
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/payment-status" className={navLinkStyle}>
+                        <MdPayment className="inline mr-2" /> Payment History
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/claim-request" className={navLinkStyle}>
+                        <MdRequestQuote className="inline mr-2" /> Claim Request Form
+                    </NavLink>
+                </li>
+            </>
+        )}
+
+        {/* agent links */}
+        {!isLoading && role === "agent" && (
+            <>
+                <li>
+                    <NavLink to="/dashboard/assigned-customers" className={navLinkStyle}>
+                        <MdGroup className="inline mr-2" /> Assigned Customers
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/manage-blogs" className={navLinkStyle}>
+                        <MdEditNote className="inline mr-2" /> Manage Blogs
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/blog-posts" className={navLinkStyle}>
+                        <MdArticle className="inline mr-2" /> Blog Posts
+                    </NavLink>
+                </li>
+            </>
+        )}
+
+        {/* admin links */}
+        {!isLoading && role === "admin" && (
+            <>
+                <li>
+                    <NavLink to="/dashboard/manage-applications" className={navLinkStyle}>
+                        <MdDescription className="inline mr-2" /> Manage Applications
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/manage-blogs" className={navLinkStyle}>
+                        <MdEditNote className="inline mr-2" /> Manage Blogs
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/manage-users" className={navLinkStyle}>
+                        <MdPeople className="inline mr-2" /> Manage Users
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/manage-policies" className={navLinkStyle}>
+                        <MdPolicy className="inline mr-2" /> Manage Policies
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/manage-transactions" className={navLinkStyle}>
+                        <MdSwapHoriz className="inline mr-2" /> Manage Transactions
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dashboard/manage-agents" className={navLinkStyle}>
+                        <MdSupervisorAccount className="inline mr-2" /> Manage Agents
+                    </NavLink>
+                </li>
+            </>
+        )}
+    </>
 
     return (
         <div className="drawer lg:drawer-open">
@@ -64,100 +157,12 @@ const DashboardLayout = () => {
                     <Link to="/" className="text-xl font-bold flex items-center gap-2">
                         <img className="w-10 h-10" src={logo} alt="Logo" />
                         ThriveSecure
+                        <span className={`px-2 py-1 rounded-full text-xs font-bold bg-teal-100 text-blue-800 uppercase`}
+                        >
+                            {role}
+                        </span>
                     </Link>
-                    <li>
-                        <NavLink to="/">
-                            <MdHome className="inline mr-2" /> Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/profile">
-                            <MdPerson className="inline mr-2" /> Profile
-                        </NavLink>
-                    </li>
-                    {/* customer links */}
-                    {!isLoading && role === "customer" && (
-                        <>
-                            <li>
-                                <NavLink to="/dashboard/my-policies">
-                                    <MdAssignment className="inline mr-2" /> My Policies
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/payment-status">
-                                    <MdPayment className="inline mr-2" /> Payment Status
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/payments">
-                                    <MdAttachMoney className="inline mr-2" /> Payments
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/claim-request">
-                                    <MdRequestQuote className="inline mr-2" /> Claim Request Form
-                                </NavLink>
-                            </li>
-                        </>
-                    )}
-
-                    {/* agent links */}
-                    {!isLoading && role === "agent" && (
-                        <>
-                            <li>
-                                <NavLink to="/dashboard/assigned-customers">
-                                    <MdGroup className="inline mr-2" /> Assigned Customers
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manage-blogs">
-                                    <MdEditNote className="inline mr-2" /> Manage Blogs
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/blog-posts">
-                                    <MdArticle className="inline mr-2" /> Blog Posts
-                                </NavLink>
-                            </li>
-                        </>
-                    )}
-
-                    {/* admin links */}
-                    {!isLoading && role === "admin" && (
-                        <>
-                            <li>
-                                <NavLink to="/dashboard/manage-applications">
-                                    <MdDescription className="inline mr-2" /> Manage Applications
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manage-blogs">
-                                    <MdEditNote className="inline mr-2" /> Manage Blogs
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manage-users">
-                                    <MdPeople className="inline mr-2" /> Manage Users
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manage-policies">
-                                    <MdPolicy className="inline mr-2" /> Manage Policies
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manage-transactions">
-                                    <MdSwapHoriz className="inline mr-2" /> Manage Transactions
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manage-agents">
-                                    <MdSupervisorAccount className="inline mr-2" /> Manage Agents
-                                </NavLink>
-                            </li>
-                        </>
-                    )}
-
+                    {links}
                 </ul>
             </div>
         </div>

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { motion } from "motion/react";
 import quoteLottie from "../../assets/quote.json";
 import Lottie from 'lottie-react';
+import StepProgress from '../../components/shared/StepProgress/StepProgress';
 
 const Quote = () => {
     const navigate = useNavigate();
@@ -95,16 +96,10 @@ const Quote = () => {
                     </form>
                 </div>
 
-                {/* Lottie Animation */}
-                <div className="hidden w-full lg:flex justify-center items-center"
-                >
-                    <Lottie
-                        style={{ width: "600px" }}
-                        animationData={quoteLottie}
-                        loop
-                    />
-                </div>
+                <StepProgress currentStep={1} />
             </div>
+
+            
         </div>
     );
 };

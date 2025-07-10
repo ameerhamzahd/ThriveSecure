@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const slides = [
     {
@@ -92,7 +93,7 @@ const BannerSlider = () => {
                                     whileTap={{ scale: 0.97 }}
                                     className="bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 font-semibold transition"
                                 >
-                                    <span>Get a Free Quote</span>
+                                    <Link to="/quote">Get a Free Quote</Link>
                                     <FaArrowRight className="w-4 h-4" />
                                 </motion.button>
                             </div>

@@ -4,6 +4,7 @@ import { toast, Bounce } from 'react-toastify';
 import { Link, NavLink } from 'react-router';
 import logo from '../../../assets/logo.png'
 import { TbLogin2, TbLogout2 } from 'react-icons/tb';
+import userAvatar from '../../../assets/user.png'
 
 const Navbar = () => {
 
@@ -86,7 +87,9 @@ const Navbar = () => {
                                     <div className="dropdown dropdown-end relative px-2">
                                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                             <div className="w-10 rounded-full ring ring-blue-800 ring-offset-base-100 ring-offset-2">
-                                                <img src={user?.photoURL} alt="User Avatar" />
+                                                <Link to="/dashboard/profile">
+                                                <img src={user?.photoURL || userAvatar} alt="User Avatar" />
+                                                </Link>
                                             </div>
                                         </label>
                                     </div>
