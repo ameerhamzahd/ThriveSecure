@@ -37,7 +37,7 @@ const ManageApplications = () => {
     const handleAssignAgent = async (id, agentEmail) => {
         await axiosSecure.patch(`/api/admin/applications/${id}/assign`, { agentEmail });
         refetch();
-        Swal.fire("Assigned!", "Agent has been assigned successfully.", "success");
+        Swal.fire("Assigned!", "Agent has been assigned successfully.", "success"); 
     };
 
     return (
