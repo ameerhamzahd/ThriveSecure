@@ -1,33 +1,35 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import {
-    FaUser, FaEnvelope, FaUserShield, FaUserTag,
+    FaUser, FaEnvelope, FaUserTag,
     FaArrowUp, FaArrowDown, FaTrash
 } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
+import Pagination from "../../../../components/shared/Pagination/Pagination";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
     const [selectedUser, setSelectedUser] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const limit = 10;
 
     const { data: users = [], refetch, isLoading } = useQuery({
-        queryKey: ["users"],
+        queryKey: ["users", currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get("/api/admin/users");
-            return res.data;
+            const res = await axiosSecure.get(`users?page=${currentPage}&limit=${limit}`);
+            setTotalPages(res.data.totalPages);
+            return res.data.users;
         },
+        keepPreviousData: true,
     });
 
     const handleRoleChange = async (id, newRole) => {
-        await axiosSecure.patch(`/api/admin/users/${id}/role`, { role: newRole });
+        await axiosSecure.patch(`users/${id}/role`, { role: newRole });
         refetch();
-        Swal.fire(
-            "Role Updated",
-            `User role has been updated to ${newRole}.`,
-            "success"
-        );
+        Swal.fire("Role Updated", `User role has been updated to ${newRole}.`, "success");
     };
 
     const handleDelete = async (id) => {
@@ -41,14 +43,14 @@ const ManageUsers = () => {
             confirmButtonText: "Yes, Delete"
         });
         if (confirm.isConfirmed) {
-            await axiosSecure.delete(`/api/admin/users/${id}`);
+            await axiosSecure.delete(`users/${id}`);
             refetch();
             Swal.fire("Deleted!", "User has been removed.", "success");
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 pt-24">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -58,7 +60,7 @@ const ManageUsers = () => {
                 <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">Manage Users</h2>
 
                 <table className="table w-full">
-                    <thead className="bg-blue-50 sticky top-0 z-10">
+                    <thead className="bg-blue-50 sticky top-0">
                         <tr>
                             <th className="py-3">User</th>
                             <th>Role</th>
@@ -94,10 +96,10 @@ const ManageUsers = () => {
                                         </div>
                                     </td>
                                     <td>
-                                        <span className={`badge 
-                                            ${user.role === "customer" && "badge-neutral"}
-                                            ${user.role === "agent" && "badge-info"}
-                                            ${user.role === "admin" && "badge-success"}
+                                        <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase 
+                                            ${user.role === "customer" && "bg-neutral text-white"}
+                                            ${user.role === "agent" && "bg-info"}
+                                            ${user.role === "admin" && "bg-success"}
                                         `}>
                                             {user.role}
                                         </span>
@@ -106,24 +108,17 @@ const ManageUsers = () => {
                                         {new Date(user.createdAt).toLocaleDateString()}
                                     </td>
                                     <td className="flex items-center gap-2">
-                                        {user.role === "customer" && (
-                                            <button
-                                                onClick={() => handleRoleChange(user._id, "agent")}
-                                                className="btn btn-sm btn-success tooltip text-white"
-                                                data-tip="Promote to Agent"
-                                            >
-                                                <FaArrowUp />
-                                            </button>
-                                        )}
-                                        {user.role === "agent" && (
-                                            <button
-                                                onClick={() => handleRoleChange(user._id, "customer")}
-                                                className="btn btn-sm btn-warning tooltip text-white"
-                                                data-tip="Demote to Customer"
-                                            >
-                                                <FaArrowDown />
-                                            </button>
-                                        )}
+                                        <select
+                                            className="select select-sm select-bordered text-sm"
+                                            value={user.role}
+                                            onChange={(e) => handleRoleChange(user._id, e.target.value)}
+                                        >
+                                            <option disabled>Change Role</option>
+                                            <option value="customer">Customer</option>
+                                            <option value="agent">Agent</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+
                                         <button
                                             onClick={() => handleDelete(user._id)}
                                             className="btn btn-sm btn-error tooltip text-white"
@@ -131,6 +126,7 @@ const ManageUsers = () => {
                                         >
                                             <FaTrash />
                                         </button>
+
                                         <label
                                             htmlFor="user-details-modal"
                                             onClick={() => setSelectedUser(user)}
@@ -145,6 +141,13 @@ const ManageUsers = () => {
                         )}
                     </tbody>
                 </table>
+
+                {/* Pagination */}
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
             </motion.div>
 
             {/* DaisyUI Modal for Viewing User Details */}

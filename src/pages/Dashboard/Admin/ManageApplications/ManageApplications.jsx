@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { motion } from "motion/react";
-import { FaUser, FaEnvelope, FaEye, FaUserCheck, FaTimesCircle } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaEye, FaTimesCircle } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
+import Pagination from "../../../../components/shared/Pagination/Pagination";
 
 const ManageApplications = () => {
     const axiosSecure = useAxiosSecure();
     const [selectedApp, setSelectedApp] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const limit = 10;
 
     const { data: applications = [], refetch, isLoading } = useQuery({
-        queryKey: ["applications"],
+        queryKey: ["applications", currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get("/api/admin/applications");
-            return res.data;
+            const res = await axiosSecure.get(`applications?page=${currentPage}&limit=${limit}`);
+            setTotalPages(res.data.totalPages);
+            return res.data.applications;
         },
+        keepPreviousData: true,
     });
 
     const handleReject = async (id) => {
@@ -28,20 +34,20 @@ const ManageApplications = () => {
             confirmButtonText: "Yes, Reject"
         });
         if (confirm.isConfirmed) {
-            await axiosSecure.patch(`/api/admin/applications/${id}/reject`);
+            await axiosSecure.patch(`applications/${id}/reject`);
             refetch();
             Swal.fire("Rejected!", "The application has been rejected.", "success");
         }
     };
 
     const handleAssignAgent = async (id, agentEmail) => {
-        await axiosSecure.patch(`/api/admin/applications/${id}/assign`, { agentEmail });
+        await axiosSecure.patch(`applications/${id}/assign`, { agentEmail });
         refetch();
-        Swal.fire("Assigned!", "Agent has been assigned successfully.", "success"); 
+        Swal.fire("Assigned!", "Agent has been assigned successfully.", "success");
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 pt-24">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -51,7 +57,7 @@ const ManageApplications = () => {
                 <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">Manage Applications</h2>
 
                 <table className="table w-full">
-                    <thead className="bg-blue-50 sticky top-0 z-10">
+                    <thead className="bg-blue-50 sticky top-0">
                         <tr>
                             <th className="py-3">Applicant</th>
                             <th>Policy</th>
@@ -68,7 +74,7 @@ const ManageApplications = () => {
                             </tr>
                         ) : applications.length === 0 ? (
                             <tr>
-                                <td colSpan="6" className="text-center py-10 text-gray-500"> No applications found.</td>
+                                <td colSpan="6" className="text-center py-10 text-gray-500">No applications found.</td>
                             </tr>
                         ) : (
                             applications.map((app) => (
@@ -133,6 +139,13 @@ const ManageApplications = () => {
                         )}
                     </tbody>
                 </table>
+
+                {/* Pagination */}
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
             </motion.div>
 
             {/* DaisyUI Modal for Viewing Details */}
