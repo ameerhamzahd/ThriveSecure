@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
-import { FaFilter, FaSpinner } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa";
 import useAxios from "../../hooks/useAxios/useAxios";
 import Pagination from "../../components/shared/Pagination/Pagination";
-import { FaTags, FaAlignLeft, FaArrowRight } from "react-icons/fa";
+import { FaTags, FaArrowRight } from "react-icons/fa";
 import Loader from "../../components/shared/Loader/Loader";
 
 const AllPolicies = () => {
@@ -98,7 +98,6 @@ const AllPolicies = () => {
 
                                     {/* Description */}
                                     <p className="text-gray-700 text-sm flex-grow mb-4 flex items-start gap-2">
-                                        <FaAlignLeft className="text-blue-500 mt-0.5" />
                                         {policy.description.split(" ").slice(0, 50).join(" ")}...
                                     </p>
 

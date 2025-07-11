@@ -80,10 +80,10 @@ const PolicyForm = ({ policy, closeModal, refetchKey }) => {
 
                 if (!confirm.isConfirmed) return;
 
-                await axiosSecure.patch(`/policies/${policy._id}`, policyData);
+                await axiosSecure.patch(`policies/${policy._id}`, policyData);
                 Swal.fire("Updated!", "Policy updated successfully.", "success");
             } else {
-                await axiosSecure.post("/policies", policyData);
+                await axiosSecure.post("policies", policyData);
                 Swal.fire("Added!", "New policy added successfully.", "success");
             }
 

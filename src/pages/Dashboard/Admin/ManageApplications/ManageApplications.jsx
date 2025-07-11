@@ -23,6 +23,14 @@ const ManageApplications = () => {
         keepPreviousData: true,
     });
 
+    const { data: agents = [] } = useQuery({
+        queryKey: ["agents"],
+        queryFn: async () => {
+            const res = await axiosSecure.get("/users?role=agent");
+            return res.data.users;
+        },
+    });
+
     const handleReject = async (id) => {
         const confirm = await Swal.fire({
             title: "Are you sure?",
@@ -90,17 +98,17 @@ const ManageApplications = () => {
                                                 <FaUser className="text-blue-600" /> {app.applicantName}
                                             </span>
                                             <span className="flex items-center gap-2 text-xs text-gray-500">
-                                                <FaEnvelope className="text-blue-400" /> {app.applicantEmail}
+                                                <FaEnvelope className="text-blue-400" /> {app.email}
                                             </span>
                                         </div>
                                     </td>
-                                    <td className="text-sm">{app.policyName}</td>
-                                    <td className="text-sm">{new Date(app.applicationDate).toLocaleDateString()}</td>
+                                    <td className="text-sm">{app.policyDetails.title}</td>
+                                    <td className="text-sm">{new Date(app.createdAt).toLocaleDateString()}</td>
                                     <td>
-                                        <span className={`badge 
+                                        <span className={`badge text-xs font-bold
                                             ${app.status === "Pending" && "badge-warning"} 
                                             ${app.status === "Approved" && "badge-success"} 
-                                            ${app.status === "Rejected" && "badge-error"} 
+                                            ${app.status === "Rejected" && "badge-error text-white"} 
                                         `}>
                                             {app.status}
                                         </span>
@@ -112,9 +120,11 @@ const ManageApplications = () => {
                                             defaultValue=""
                                         >
                                             <option disabled value="">Assign Agent</option>
-                                            <option value="agent1@thrive.com">Agent 1</option>
-                                            <option value="agent2@thrive.com">Agent 2</option>
-                                            <option value="agent3@thrive.com">Agent 3</option>
+                                            {agents.map(agent => (
+                                                <option key={agent._id} value={agent.email}>
+                                                    {agent.name} ({agent.email})
+                                                </option>
+                                            ))}
                                         </select>
                                     </td>
                                     <td className="flex items-center gap-2">
@@ -156,11 +166,11 @@ const ManageApplications = () => {
                     {selectedApp ? (
                         <div className="space-y-1 text-sm text-gray-700">
                             <p><strong>Name:</strong> {selectedApp.applicantName}</p>
-                            <p><strong>Email:</strong> {selectedApp.applicantEmail}</p>
-                            <p><strong>Policy:</strong> {selectedApp.policyName}</p>
+                            <p><strong>Email:</strong> {selectedApp.email}</p>
+                            <p><strong>Policy:</strong> {selectedApp.policyDetails.title}</p>
                             <p><strong>Status:</strong> {selectedApp.status}</p>
-                            <p><strong>Submitted:</strong> {new Date(selectedApp.applicationDate).toLocaleString()}</p>
-                            <p><strong>Details:</strong> {selectedApp.details || "N/A"}</p>
+                            <p><strong>Submitted:</strong> {new Date(selectedApp.createdAt).toLocaleString()}</p>
+                            <p><strong>Details:</strong> {selectedApp.policyDetails.description || "N/A"}</p>
                         </div>
                     ) : (
                         <p className="text-gray-500">No details to show.</p>

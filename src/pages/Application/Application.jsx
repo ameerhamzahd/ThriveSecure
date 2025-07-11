@@ -1,16 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import Lottie from "lottie-react";
 import { motion } from "motion/react";
+import { useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import applicationLottie from "../../assets/application.json";
 import useAuth from "../../hooks/useAuth/useAuth";
-import useAxios from "../../hooks/useAxios/useAxios";
 import StepProgress from "../../components/shared/StepProgress/StepProgress";
+import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Application = () => {
+    const { id } = useParams();
     const { user } = useAuth();
-    const axiosInstance = useAxios();
+    const axiosSecure = useAxiosSecure();
 
     const {
         register,
@@ -19,63 +22,84 @@ const Application = () => {
         reset
     } = useForm();
 
+    // Fetch specific policy data
+    const { data: policy, isLoading, isError } = useQuery({
+        queryKey: ["policy", id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`policies/${id}`);
+            return res.data;
+        },
+    });
+
     const onSubmit = async (data) => {
-        try {
             const applicationData = {
                 applicantName: user?.displayName || "",
                 email: user?.email || "",
+                photoURL: user?.photoURL || "",
                 ...data,
+                policyId: id,
+                policyDetails: policy, // attach fetched policy details
                 status: "Pending",
+                paymentStatus: "Due",
                 createdAt: new Date().toISOString(),
             };
 
-            const res = await axiosInstance.post("/applications", applicationData);
+            const res = await axiosSecure.post("applications", applicationData);
 
             if (res.data.insertedId || res.data.success) {
-                toast.success("Application submitted successfully!", { position: "top-center" });
+                Swal.fire("Submitted!", "Application submitted successfully.", "success");
                 reset();
             } else {
-                toast.error("Submission failed, please try again.", { position: "top-center" });
+                Swal.fire("Rejected!", "The application has been rejected.", "error");
             }
-        } catch (error) {
-            toast.error(error.message, { position: "top-center" });
-        }
     };
 
     const healthConditions = [
-        "Diabetes",
-        "Hypertension",
-        "Heart Disease",
-        "Smoking",
-        "Asthma",
-        "Obesity",
-        "Cancer History",
-        "Chronic Kidney Disease",
-        "Liver Disease",
-        "Mental Health Disorders",
-        "High Cholesterol",
-        "Thyroid Disorders",
-        "Arthritis",
-        "Sleep Apnea",
-        "COVID-19 Long-term Effects"
+        "Diabetes", "Hypertension", "Heart Disease", "Smoking", "Asthma",
+        "Obesity", "Cancer History", "Chronic Kidney Disease", "Liver Disease",
+        "Mental Health Disorders", "High Cholesterol", "Thyroid Disorders",
+        "Arthritis", "Sleep Apnea", "COVID-19 Long-term Effects"
     ];
+
+    if (isLoading) {
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <span className="loading loading-spinner loading-lg text-primary"></span>
+            </div>
+        );
+    }
+
+    if (isError) {
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <p className="text-red-600">Failed to load policy details for application.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center pt-30 bg-white gap-10">
             <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Form */}
-                <div className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl"
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl"
                 >
-                    <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4">Life Insurance Application</h1>
-                    <p className="text-gray-600 text-center mb-6 text-sm sm:text-base">Fill in your details to apply for your policy</p>
+                    <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">
+                        Apply for 
+                        <p className="text-blue-800">{policy.title}</p>
+                    </h1>
+                    <p className="text-gray-600 text-center mb-4 text-sm sm:text-base">
+                        Category: {policy.category}
+                    </p>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
                         {/* Personal Details */}
                         <fieldset className="border border-gray-300 rounded-lg p-4">
                             <legend className="text-lg font-semibold px-2">Personal Details</legend>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                                {/* Name */}
                                 <div>
                                     <label className="block mb-1 font-medium">Full Name</label>
                                     <input
@@ -84,10 +108,9 @@ const Application = () => {
                                         name="fullName"
                                         className="input input-bordered w-full"
                                         placeholder="Enter your full name"
+                                        readOnly
                                     />
                                 </div>
-
-                                {/* Email */}
                                 <div>
                                     <label className="block mb-1 font-medium">Email</label>
                                     <input
@@ -96,11 +119,9 @@ const Application = () => {
                                         name="email"
                                         className="input input-bordered w-full"
                                         placeholder="Enter your email"
+                                        readOnly
                                     />
                                 </div>
-
-
-                                {/* NID */}
                                 <div>
                                     <label className="block mb-1 font-medium">NID</label>
                                     <input
@@ -110,8 +131,6 @@ const Application = () => {
                                     />
                                     {errors.nid && <p className="text-red-500 text-sm">{errors.nid.message}</p>}
                                 </div>
-
-                                {/* Address */}
                                 <div>
                                     <label className="block mb-1 font-medium">Address</label>
                                     <input
@@ -121,8 +140,6 @@ const Application = () => {
                                     />
                                     {errors.address && <p className="text-red-500 text-sm">{errors.address.message}</p>}
                                 </div>
-
-                                {/* Date of Birth */}
                                 <div>
                                     <label className="block mb-1 font-medium">Date of Birth</label>
                                     <input
@@ -132,8 +149,6 @@ const Application = () => {
                                     />
                                     {errors.dob && <p className="text-red-500 text-sm">{errors.dob.message}</p>}
                                 </div>
-
-                                {/* Contact Number */}
                                 <div>
                                     <label className="block mb-1 font-medium">Contact Number</label>
                                     <input
@@ -150,7 +165,6 @@ const Application = () => {
                         <fieldset className="border border-gray-300 rounded-lg p-4">
                             <legend className="text-lg font-semibold px-2">Nominee Details</legend>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                                {/* Nominee Name */}
                                 <div>
                                     <label className="block mb-1 font-medium">Nominee Name</label>
                                     <input
@@ -160,8 +174,6 @@ const Application = () => {
                                     />
                                     {errors.nomineeName && <p className="text-red-500 text-sm">{errors.nomineeName.message}</p>}
                                 </div>
-
-                                {/* Relationship */}
                                 <div>
                                     <label className="block mb-1 font-medium">Relationship</label>
                                     <input
@@ -171,8 +183,6 @@ const Application = () => {
                                     />
                                     {errors.nomineeRelation && <p className="text-red-500 text-sm">{errors.nomineeRelation.message}</p>}
                                 </div>
-
-                                {/* Nominee Contact */}
                                 <div>
                                     <label className="block mb-1 font-medium">Nominee Contact</label>
                                     <input
@@ -182,8 +192,6 @@ const Application = () => {
                                     />
                                     {errors.nomineeContact && <p className="text-red-500 text-sm">{errors.nomineeContact.message}</p>}
                                 </div>
-
-                                {/* Nominee NID */}
                                 <div>
                                     <label className="block mb-1 font-medium">Nominee NID</label>
                                     <input
@@ -193,8 +201,6 @@ const Application = () => {
                                     />
                                     {errors.nomineeNID && <p className="text-red-500 text-sm">{errors.nomineeNID.message}</p>}
                                 </div>
-
-                                {/* Nominee Email */}
                                 <div>
                                     <label className="block mb-1 font-medium">Nominee Email</label>
                                     <input
@@ -235,15 +241,13 @@ const Application = () => {
 
                         <StepProgress currentStep={2} />
                     </form>
-                </div>
+                </motion.div>
 
-                {/* Right: Lottie Animation */}
+                {/* Lottie Animation */}
                 <div className="hidden lg:flex items-center justify-center">
                     <Lottie style={{ width: "600px" }} animationData={applicationLottie} loop />
                 </div>
             </div>
-
-
         </div>
     );
 };

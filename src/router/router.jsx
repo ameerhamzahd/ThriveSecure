@@ -18,6 +18,7 @@ import ManageAgents from '../pages/Dashboard/Admin/ManageAgents/ManageAgents';
 import PolicyQuote from '../pages/Quote/PolicyQuote/PolicyQuote';
 import AllPolicies from '../pages/AllPolicies/AllPolicies';
 import PolicyDetails from '../pages/PolicyDetails/PolicyDetails';
+import MyPolicies from '../pages/Dashboard/Customer/MyPolicies/MyPolicies';
 
 export const router = createBrowserRouter([
   {
@@ -105,7 +106,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-policies",
-        Component: PaymentGateway
+        Component: MyPolicies
       },
       {
         path: "payment-status",
