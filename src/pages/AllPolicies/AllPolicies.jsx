@@ -6,6 +6,7 @@ import { FaFilter, FaSpinner } from "react-icons/fa";
 import useAxios from "../../hooks/useAxios/useAxios";
 import Pagination from "../../components/shared/Pagination/Pagination";
 import { FaTags, FaAlignLeft, FaArrowRight } from "react-icons/fa";
+import Loader from "../../components/shared/Loader/Loader";
 
 const AllPolicies = () => {
     const axiosInstance = useAxios();
@@ -33,12 +34,12 @@ const AllPolicies = () => {
         : policies.filter(policy => policy.category === selectedCategory);
 
     return (
-        <div className="min-h-screen bg-white px-4 pt-30">
+        <div className="min-h-screen bg-white pt-30">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="max-w-7xl mx-auto"
+                className="max-w-11/12 mx-auto"
             >
                 <h2 className="text-center text-3xl font-bold text-blue-800 mb-8">
                     All Insurance Policies
@@ -66,10 +67,7 @@ const AllPolicies = () => {
 
                 {/* Policy Cards */}
                 {isLoading ? (
-                    <div className="flex justify-center items-center h-60 text-blue-700">
-                        <FaSpinner className="animate-spin mr-2" />
-                        Loading policies...
-                    </div>
+                    <Loader></Loader>
                 ) : filteredPolicies.length === 0 ? (
                     <p className="text-center text-gray-500 mt-10">No policies found.</p>
                 ) : (
@@ -84,7 +82,7 @@ const AllPolicies = () => {
                                 <img
                                     src={policy.image}
                                     alt={policy.title}
-                                    className="h-48 w-full object-cover object-top"
+                                    className="h-50 w-full object-cover object-top"
                                 />
                                 <div className="p-4 flex flex-col flex-grow">
                                     {/* Title + Category */}
@@ -106,7 +104,7 @@ const AllPolicies = () => {
 
                                     {/* View Details */}
                                     <button
-                                        onClick={() => navigate(`/policies/${policy._id}`)}
+                                        onClick={() => navigate(`/policy/${policy._id}`)}
                                         className="mt-auto btn btn-primary btn-sm w-full flex items-center justify-center gap-2"
                                     >
                                         View Details <FaArrowRight />

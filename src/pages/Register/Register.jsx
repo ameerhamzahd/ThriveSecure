@@ -32,7 +32,7 @@ const Register = () => {
         setUploading(true);
         try {
             const formData = new FormData();
-            formData.append('file', image); // ✅ Correct key
+            formData.append('file', image);
             formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
     
             const res = await axios.post(
@@ -40,7 +40,7 @@ const Register = () => {
                 formData
             );
     
-            setUploadedPhotoURL(res.data.secure_url); // ✅ Correct value
+            setUploadedPhotoURL(res.data.secure_url);
             toast.success("Photo uploaded successfully!", { transition: Bounce });
         } catch (error) {
             console.error("Upload error:", error);
