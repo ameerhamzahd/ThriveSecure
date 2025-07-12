@@ -19,6 +19,7 @@ import PolicyQuote from '../pages/Quote/PolicyQuote/PolicyQuote';
 import AllPolicies from '../pages/AllPolicies/AllPolicies';
 import PolicyDetails from '../pages/PolicyDetails/PolicyDetails';
 import MyPolicies from '../pages/Dashboard/Customer/MyPolicies/MyPolicies';
+import ProfileHistory from '../pages/Dashboard/Customer/PaymentHistory/PaymentHistory';
 
 export const router = createBrowserRouter([
   {
@@ -69,7 +70,7 @@ export const router = createBrowserRouter([
         Component: Dashboard
       },
       {
-        path: "payment",
+        path: "payment/:id",
         Component: PaymentGateway
       },
       {
@@ -109,8 +110,8 @@ export const router = createBrowserRouter([
         Component: MyPolicies
       },
       {
-        path: "payment-status",
-        Component: PaymentGateway
+        path: "payment-history",
+        Component: ProfileHistory
       },
       {
         path: "claim-request",

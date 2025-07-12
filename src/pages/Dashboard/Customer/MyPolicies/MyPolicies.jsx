@@ -89,6 +89,8 @@ const MyPolicies = () => {
                 [`Policy Title:`, policy.policyDetails.title],
                 [`Policyholder Name:`, policy.applicantName],
                 [`Email:`, policy.email],
+                [`Nominee Name:`, policy.nomineeName],
+                [`Nominee Email:`, policy.nomineeEmail],
                 [`Coverage:`, policy.policyDetails.coverageRange],
                 [`Duration:`, policy.policyDetails.durationOptions],
                 [`Premium:`, `$${policy.policyDetails.basePremiumRate}/month`],
@@ -208,7 +210,7 @@ const MyPolicies = () => {
                     <form onSubmit={handleSubmit(handleReviewSubmit)} className="space-y-3">
                         <div>
                             <label className="block mb-1 font-medium">Rating</label>
-                            <div className="flex gap-2 text-2xl">
+                            <div className="flex gap-2 text-5xl">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <span
                                         key={star}

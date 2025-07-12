@@ -48,7 +48,7 @@ const DashboardLayout = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/dashboard/payment-status" className={navLinkStyle}>
+                    <NavLink to="/dashboard/payment-history" className={navLinkStyle}>
                         <MdPayment className="inline mr-2" /> Payment History
                     </NavLink>
                 </li>
