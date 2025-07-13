@@ -17,7 +17,6 @@ import {
     MdSupervisorAccount
 } from "react-icons/md";
 import logo from "../../assets/logo.png"
-import userAvatar from "../../assets/user.png"
 import useAuth from '../../hooks/useAuth/useAuth';
 
 const DashboardLayout = () => {
@@ -100,8 +99,8 @@ const DashboardLayout = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/dashboard/manage-agents" className={navLinkStyle}>
-                        <MdSupervisorAccount className="inline mr-2" /> Manage Agents
+                    <NavLink to="/dashboard/manage-blogs" className={navLinkStyle}>
+                        <MdEditNote className="inline mr-2" /> Manage Blogs
                     </NavLink>
                 </li>
             </>

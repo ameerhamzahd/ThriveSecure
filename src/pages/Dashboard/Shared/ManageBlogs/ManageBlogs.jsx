@@ -53,7 +53,7 @@ const ManageBlogs = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="max-w-4xl w-full bg-white shadow-lg rounded-2xl overflow-x-auto p-6"
+                className="max-w-7xl w-full bg-white shadow-lg rounded-2xl overflow-x-auto p-6"
             >
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold text-blue-800">Manage Blogs</h2>
@@ -68,6 +68,7 @@ const ManageBlogs = () => {
                     <thead className="bg-blue-50 sticky top-0">
                         <tr>
                             <th>Title</th>
+                            <th>Content Summary</th>
                             <th>Author</th>
                             <th>Publish Date</th>
                             <th>Actions</th>
@@ -75,9 +76,9 @@ const ManageBlogs = () => {
                     </thead>
                     <tbody>
                         {isLoading ? (
-                            <tr><td colSpan="4" className="text-center py-10 text-gray-500">Loading blogs...</td></tr>
+                            <tr><td colSpan="5" className="text-center py-10 text-gray-500">Loading blogs...</td></tr>
                         ) : blogs.length === 0 ? (
-                            <tr><td colSpan="4" className="text-center py-10 text-gray-500">No blogs found.</td></tr>
+                            <tr><td colSpan="5" className="text-center py-10 text-gray-500">No blogs found.</td></tr>
                         ) : (
                             blogs.map(blog => (
                                 <motion.tr
@@ -87,6 +88,7 @@ const ManageBlogs = () => {
                                     className="border-b"
                                 >
                                     <td className="py-3 font-medium text-gray-800">{blog.title}</td>
+                                    <td className="py-3 font-medium text-gray-800">{blog.content.split(" ").slice(0, 10).join(" ")}...</td>
                                     <td className="text-sm text-gray-700">{blog.author}</td>
                                     <td className="text-sm text-gray-700">{new Date(blog.publishDate).toLocaleDateString()}</td>
                                     <td className="flex items-center gap-2">

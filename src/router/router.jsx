@@ -21,7 +21,8 @@ import PolicyDetails from '../pages/PolicyDetails/PolicyDetails';
 import MyPolicies from '../pages/Dashboard/Customer/MyPolicies/MyPolicies';
 import ProfileHistory from '../pages/Dashboard/Customer/PaymentHistory/PaymentHistory';
 import AssignedCustomers from '../pages/Dashboard/Agent/AssignedCustomers/AssignedCustomers';
-import ManageBlogs from '../pages/Dashboard/Agent/ManageBlogs/ManageBlogs';
+import ManageBlogs from '../pages/Dashboard/Shared/ManageBlogs/ManageBlogs';
+import Articles from '../pages/Articles/Articles';
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: "policy/:id",
         Component: PolicyDetails
+      },
+      {
+        path: "articles",
+        Component: Articles
       },
     ]
   },

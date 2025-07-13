@@ -1,6 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import PaymentGatewayForm from "../PaymentGatewayForm/PaymentGatewayForm";
+import PaymentGatewayForm from "./PaymentGatewayForm/PaymentGatewayForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 

@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { FaCreditCard, FaLock, FaCheckCircle, FaShieldAlt } from "react-icons/fa";
-import useAuth from "../../../../hooks/useAuth/useAuth";
-import StepProgress from "../../../../components/shared/StepProgress/StepProgress";
+import useAuth from "../../../../../hooks/useAuth/useAuth";
+import StepProgress from "../../../../../components/shared/StepProgress/StepProgress";
 import { useParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
-import Loader from "../../../../components/shared/Loader/Loader";
+import useAxiosSecure from "../../../../../hooks/useAxiosSecure/useAxiosSecure";
+import Loader from "../../../../../components/shared/Loader/Loader";
 
 const PaymentGatewayForm = () => {
     const stripe = useStripe();
