@@ -24,6 +24,7 @@ import AssignedCustomers from '../pages/Dashboard/Agent/AssignedCustomers/Assign
 import ManageBlogs from '../pages/Dashboard/Shared/ManageBlogs/ManageBlogs';
 import Articles from '../pages/Articles/Articles';
 import ClaimRequest from '../pages/Dashboard/Customer/ClaimRequest/ClaimRequest';
+import PolicyClearance from '../pages/Dashboard/Agent/PolicyClearance/PolicyClearance';
 
 export const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ export const router = createBrowserRouter([
       {
         path: "assigned-customers",
         Component: AssignedCustomers
+      },
+      {
+        path: "policy-clearance",
+        Component: PolicyClearance
       },
       {
         path: "manage-blogs",

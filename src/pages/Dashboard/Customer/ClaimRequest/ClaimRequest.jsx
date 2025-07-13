@@ -7,6 +7,7 @@ import { FaFileUpload, FaCheckCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Bounce, toast } from "react-toastify";
 import useAuth from "../../../../hooks/useAuth/useAuth";
+import axios from "axios";
 
 const ClaimRequest = () => {
     const { user } = useAuth();
@@ -14,13 +15,26 @@ const ClaimRequest = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
     const [uploading, setUploading] = useState(false);
+    const [uploadedImageURL, setUploadedImageURL] = useState("");
+    const [selectedPolicy, setSelectedPolicy] = useState("");
+    const [isClaimApproved, setIsClaimApproved] = useState(false);
 
-    // Fetch customer applications with policy details
+
+    // Fetch approved customer applications
     const { data: applications = [], isLoading } = useQuery({
         queryKey: ["approvedPolicies", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/applications?email=${user?.email}`);
             return res.data.applications || [];
+        },
+        enabled: !!user?.email,
+    });
+
+    const { data: userClaims = [] } = useQuery({
+        queryKey: ["userClaims", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/claims?email=${user?.email}`);
+            return res.data || [];
         },
         enabled: !!user?.email,
     });
@@ -35,51 +49,56 @@ const ClaimRequest = () => {
             queryClient.invalidateQueries(["approvedPolicies"]);
             Swal.fire("Submitted!", "Your claim request has been submitted.", "success");
             reset();
+            setUploadedImageURL("");
         },
         onError: () => {
             Swal.fire("Error", "Failed to submit claim. Try again.", "error");
         },
     });
 
-    // Form submission handler
-    const onSubmit = async (data) => {
-        if (!data.document[0]) {
-            toast.error("Please upload a claim document.", { transition: Bounce });
-            return;
-        }
-
+    // Handle image upload
+    const handleImageUpload = async (e) => {
+        const image = e.target.files[0];
+        if (!image) return;
         setUploading(true);
         try {
             const formData = new FormData();
-            formData.append("file", data.document[0]);
+            formData.append("file", image);
             formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
-
-            const res = await axiosSecure.post(
-                `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/upload`,
+            const res = await axios.post(
+                `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
                 formData
             );
-            const documentURL = res.data.secure_url;
-
-            const claimData = {
-                policyName: data.policyName,
-                reason: data.reason,
-                document: documentURL,
-                status: "Pending",
-                email: user?.email,
-            };
-
-            claimMutation.mutate(claimData);
-        } catch (error) {
-            toast.error("Failed to upload document.", { transition: Bounce });
+            setUploadedImageURL(res.data.secure_url);
+            toast.success("Image uploaded successfully.", { transition: Bounce });
+        } catch {
+            toast.error("Failed to upload image.", { transition: Bounce });
         } finally {
             setUploading(false);
         }
     };
 
+    // Form submission
+    const onSubmit = async (data) => {
+        if (!uploadedImageURL) {
+            toast.error("Please upload an image before submitting your claim.", { transition: Bounce });
+            return;
+        }
+
+        const claimData = {
+            policyName: data.policyName,
+            reason: data.reason,
+            document: uploadedImageURL,
+            status: "Pending",
+            email: user?.email,
+        };
+
+        claimMutation.mutate(claimData);
+    };
+
     // Filter policies with agentAssignStatus === "Approved"
     const approvedPolicies = applications.filter(app =>
-        app.agentAssignStatus === "Approved" &&
-        app.policyDetails?.title
+        app.agentAssignStatus === "Approved" && app.policyDetails?.title
     );
 
     return (
@@ -101,10 +120,20 @@ const ClaimRequest = () => {
 
                         {/* Policy selection */}
                         <div>
-                            <label className="label"><span className="label-text font-medium">Select Approved Policy</span></label>
+                            <label className="label">
+                                <span className="label-text font-medium">Select Approved Policy</span>
+                            </label>
                             <select
                                 className={`select select-bordered w-full ${errors.policyName ? "border-red-500" : ""}`}
                                 {...register("policyName", { required: "Policy is required." })}
+                                onChange={(e) => {
+                                    const policyName = e.target.value;
+                                    setSelectedPolicy(policyName);
+                                    const approvedClaim = userClaims.find(
+                                        claim => claim.policyName === policyName && claim.status === "Approved"
+                                    );
+                                    setIsClaimApproved(!!approvedClaim);
+                                }}
                             >
                                 <option value="">Select a policy</option>
                                 {approvedPolicies.map(app => (
@@ -118,7 +147,9 @@ const ClaimRequest = () => {
 
                         {/* Reason for claim */}
                         <div>
-                            <label className="label"><span className="label-text font-medium">Reason for Claim</span></label>
+                            <label className="label">
+                                <span className="label-text font-medium">Reason for Claim</span>
+                            </label>
                             <textarea
                                 placeholder="Describe your reason for claiming..."
                                 className={`textarea textarea-bordered w-full ${errors.reason ? "border-red-500" : ""}`}
@@ -127,31 +158,39 @@ const ClaimRequest = () => {
                             {errors.reason && <p className="text-xs text-red-500 mt-1">{errors.reason.message}</p>}
                         </div>
 
-                        {/* Document upload */}
+                        {/* Image upload */}
                         <div>
-                            <label className="label"><span className="label-text font-medium">Upload Claim Document (PDF/Image)</span></label>
+                            <label className="label">
+                                <span className="label-text font-medium">Upload Claim Document (Image Only)</span>
+                            </label>
                             <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-4 cursor-pointer hover:bg-gray-50 transition">
                                 <FaFileUpload className="text-gray-500 text-2xl mb-2" />
                                 <span className="text-gray-600">
-                                    {uploading ? "Uploading..." : "Click to upload document"}
+                                    {uploading ? "Uploading..." : uploadedImageURL ? "Image Uploaded" : "Click to upload image"}
                                 </span>
                                 <input
                                     type="file"
-                                    accept="application/pdf,image/*"
+                                    accept="image/*"
                                     className="hidden"
-                                    {...register("document", { required: "Document is required." })}
+                                    onChange={handleImageUpload}
                                 />
                             </label>
-                            {errors.document && <p className="text-xs text-red-500 mt-1">{errors.document.message}</p>}
+                            {uploadedImageURL && (
+                                <img
+                                    src={uploadedImageURL}
+                                    alt="Uploaded Claim"
+                                    className="mt-2 rounded-lg max-h-48 mx-auto shadow"
+                                />
+                            )}
                         </div>
 
                         {/* Submit button */}
                         <button
                             type="submit"
-                            disabled={isSubmitting || uploading}
+                            disabled={isSubmitting || uploading || isClaimApproved}
                             className="btn btn-primary w-full flex items-center justify-center gap-2"
                         >
-                            {isSubmitting || uploading ? "Submitting..." : <>Submit Claim <FaCheckCircle /></>}
+                            {isSubmitting || uploading ? "Submitting..." : <>Submit Claim</>}
                         </button>
                     </form>
                 )}
