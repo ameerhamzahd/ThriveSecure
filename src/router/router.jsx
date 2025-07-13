@@ -23,6 +23,7 @@ import ProfileHistory from '../pages/Dashboard/Customer/PaymentHistory/PaymentHi
 import AssignedCustomers from '../pages/Dashboard/Agent/AssignedCustomers/AssignedCustomers';
 import ManageBlogs from '../pages/Dashboard/Shared/ManageBlogs/ManageBlogs';
 import Articles from '../pages/Articles/Articles';
+import ClaimRequest from '../pages/Dashboard/Customer/ClaimRequest/ClaimRequest';
 
 export const router = createBrowserRouter([
   {
@@ -118,7 +119,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "claim-request",
-        Component: PaymentGateway
+        Component: ClaimRequest
       },
       {
         path: "profile",
