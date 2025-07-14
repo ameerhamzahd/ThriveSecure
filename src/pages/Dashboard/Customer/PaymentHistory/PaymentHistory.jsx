@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { FaCreditCard, FaCheckCircle, FaClock } from "react-icons/fa";
 import useAuth from "../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
+import Pagination from "../../../../components/shared/Pagination/Pagination"; // assuming you have this
 
 const ProfileHistory = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const limit = 5;
+
     const { data: policies = [], isLoading } = useQuery({
-        queryKey: ["approvedPolicies", user?.email],
+        queryKey: ["approvedPolicies", user?.email, currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`applications?email=${user?.email}&agentAssignStatus=Approved`);
-            return res.data.applications;
+            const res = await axiosSecure.get(`applications`, {
+                params: {
+                    email: user?.email,
+                    agentAssignStatus: "Approved",
+                    page: currentPage,
+                    limit: limit,
+                },
+            });
+            setTotalPages(res.data.totalPages || 1);
+            return res.data.applications || [];
         },
         enabled: !!user?.email,
+        keepPreviousData: true,
     });
 
     return (
@@ -102,6 +116,13 @@ const ProfileHistory = () => {
                         )}
                     </tbody>
                 </table>
+
+                {/* Pagination */}
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
             </motion.div>
         </div>
     );

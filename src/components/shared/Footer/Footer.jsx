@@ -14,15 +14,11 @@ const Footer = () => {
     const services = <>
         <li><NavLink to="/" className={navLinkStyle}>Home</NavLink></li>
         <li><NavLink to="/all-policies" className={navLinkStyle}>All Policies</NavLink></li>
-        <li><NavLink to="/agents" className={navLinkStyle}>Agents</NavLink></li>
-        {
-            user && <li><NavLink to="/dashboard" className={navLinkStyle}>Dashboard</NavLink></li>
-        }
+        <li><NavLink to="/articles" className={navLinkStyle}>Articles</NavLink></li>
     </>;
 
     const articles = <>
         <li><NavLink to="/about-us" className={navLinkStyle}>About Us</NavLink></li>
-        <li><NavLink to="/articles" className={navLinkStyle}>Articles</NavLink></li>
         <li><NavLink to="/contact-us" className={navLinkStyle}>Contact Us</NavLink></li>
         <li><NavLink to="/faqs" className={navLinkStyle}>FAQs</NavLink></li>
     </>;

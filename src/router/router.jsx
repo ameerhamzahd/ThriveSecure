@@ -25,6 +25,7 @@ import ManageBlogs from '../pages/Dashboard/Shared/ManageBlogs/ManageBlogs';
 import Articles from '../pages/Articles/Articles';
 import ClaimRequest from '../pages/Dashboard/Customer/ClaimRequest/ClaimRequest';
 import PolicyClearance from '../pages/Dashboard/Agent/PolicyClearance/PolicyClearance';
+import FAQ from '../pages/FAQ/FAQ';
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         path: "articles",
         Component: Articles
+      },
+      {
+        path: "faq",
+        Component: FAQ
       },
     ]
   },

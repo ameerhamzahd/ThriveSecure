@@ -8,13 +8,12 @@ import {
     MdPayment,
     MdRequestQuote,
     MdGroup,
-    MdEditNote,
     MdArticle,
     MdDescription,
-    MdPeople,
     MdPolicy,
     MdSwapHoriz,
-    MdSupervisorAccount
+    MdSupervisorAccount,
+    MdCheckCircle
 } from "react-icons/md";
 import logo from "../../assets/logo.png"
 import useAuth from '../../hooks/useAuth/useAuth';
@@ -69,12 +68,12 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                     <NavLink to="/dashboard/manage-blogs" className={navLinkStyle}>
-                        <MdEditNote className="inline mr-2" /> Manage Blogs
+                    <MdArticle className="inline mr-2" /> Manage Blogs
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard/policy-clearance" className={navLinkStyle}>
-                        <MdEditNote className="inline mr-2" /> Policy Clearance
+                    <MdCheckCircle className="inline mr-2" /> Policy Clearance
                     </NavLink>
                 </li>
             </>
@@ -90,7 +89,7 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                     <NavLink to="/dashboard/manage-users" className={navLinkStyle}>
-                        <MdPeople className="inline mr-2" /> Manage Users
+                    <MdSupervisorAccount className="inline mr-2" /> Manage Users
                     </NavLink>
                 </li>
                 <li>

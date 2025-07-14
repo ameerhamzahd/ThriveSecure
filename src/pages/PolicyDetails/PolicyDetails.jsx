@@ -131,12 +131,6 @@ const PolicyDetails = () => {
                         >
                             <FaCalculator /> Get Quote
                         </button>
-                        <button
-                            onClick={() => navigate(`/book-agent/${policy._id}`)}
-                            className="btn btn-outline btn-accent flex items-center gap-2 flex-grow"
-                        >
-                            <FaPhone /> Book Agent Consultation
-                        </button>
                     </div>
                 </motion.div>
             </div>
