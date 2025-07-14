@@ -23,22 +23,14 @@ const ManageBlogs = () => {
     const { data: blogs = [], isLoading } = useQuery({
         queryKey: ["blogs", user?.email, role, currentPage],
         queryFn: async () => {
-            if (roleLoading) return []; // optionally wait for role to load
-            
-            let url = `blogs?page=${currentPage}&limit=${limit}&role=${role}`;
-            if (role !== "admin") {
-                url += `&authorEmail=${user?.email}`;
-            }
-            console.log("URL:", url);
-            const res = await axiosSecure.get(url);
+            if (roleLoading) return []; // wait if role is loading
+            const res = await axiosSecure.get(`blogs/${role}/${user?.email}?page=${currentPage}&limit=${limit}`);
             setTotalPages(res.data.totalPages);
             return res.data.blogs;
         },
         enabled: !!user?.email && !!role && !roleLoading,
         keepPreviousData: true,
     });
-    
-
 
     const handleDelete = async (id) => {
         const confirm = await Swal.fire({
