@@ -212,7 +212,10 @@ const ManageTransactions = () => {
                             </tr>
                         ) : (
                             transactions.map((txn) => (
-                                <tr key={txn._id} className="border-b hover:bg-blue-50">
+                                <motion.tr key={txn._id} 
+                                whileHover={{ scale: 1.01, backgroundColor: "#f9fafb" }}
+                                transition={{ duration: 0.2 }}
+                                className="border-b">
                                     <td className="text-xs break-all">{txn.paymentIntentId}</td>
                                     <td className="text-sm">{txn.userEmail}</td>
                                     <td className="text-sm">{txn.policyName}</td>
@@ -226,7 +229,7 @@ const ManageTransactions = () => {
                                             {txn.status}
                                         </span>
                                     </td>
-                                </tr>
+                                </motion.tr>
                             ))
                         )}
                     </tbody>
