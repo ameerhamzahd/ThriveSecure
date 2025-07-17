@@ -73,11 +73,6 @@ const DashboardLayout = () => {
                         <MdEditNote className="inline mr-2" /> Manage Blogs
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to="/dashboard/blog-posts" className={navLinkStyle}>
-                        <MdArticle className="inline mr-2" /> Blog Posts
-                    </NavLink>
-                </li>
             </>
         )}
 

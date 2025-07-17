@@ -106,7 +106,7 @@ const PolicyForm = ({ policy, closeModal, refetchKey }) => {
                         {policy ? "Edit Policy" : "Add New Policy"}
                     </h3>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-gray-100">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 overflow-y-auto">
 
                         {/* Title */}
                         <div>

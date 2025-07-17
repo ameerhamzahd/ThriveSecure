@@ -105,8 +105,10 @@ const AssignedCustomers = () => {
                                     <td className="py-3">
                                         <select
                                             className="select select-bordered select-sm w-full max-w-xs"
-                                            value={customer.status}
-                                            onChange={(e) => handleStatusChange(customer._id, e.target.value, customer.policyId)}
+                                            value={customer.agentAssignStatus || "Pending"}
+                                            onChange={(e) =>
+                                                handleStatusChange(customer._id, e.target.value, customer.policyId)
+                                            }
                                         >
                                             <option value="Pending">Pending</option>
                                             <option value="Approved">Approved</option>
@@ -143,7 +145,7 @@ const AssignedCustomers = () => {
                         <p><strong>Name:</strong> {selectedCustomer?.applicantName}</p>
                         <p><strong>Email:</strong> {selectedCustomer?.email}</p>
                         <p><strong>Interested Policy:</strong> {selectedCustomer?.policyDetails.title}</p>
-                        <p><strong>Status:</strong> {selectedCustomer?.status}</p>
+                        <p><strong>Status:</strong> {selectedCustomer?.adminAssignStatus}</p>
                         <p><strong>Submitted:</strong> {new Date(selectedCustomer?.createdAt).toLocaleString()}</p>
                         <p><strong>Details:</strong> {selectedCustomer?.policyDetails.description}</p>
                     </div>

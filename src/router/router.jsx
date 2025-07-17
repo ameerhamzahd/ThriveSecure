@@ -21,6 +21,7 @@ import PolicyDetails from '../pages/PolicyDetails/PolicyDetails';
 import MyPolicies from '../pages/Dashboard/Customer/MyPolicies/MyPolicies';
 import ProfileHistory from '../pages/Dashboard/Customer/PaymentHistory/PaymentHistory';
 import AssignedCustomers from '../pages/Dashboard/Agent/AssignedCustomers/AssignedCustomers';
+import ManageBlogs from '../pages/Dashboard/Agent/ManageBlogs/ManageBlogs';
 
 export const router = createBrowserRouter([
   {
@@ -100,11 +101,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-blogs",
-        Component: PaymentGateway
-      },
-      {
-        path: "blog-posts",
-        Component: PaymentGateway
+        Component: ManageBlogs
       },
       {
         path: "my-policies",
