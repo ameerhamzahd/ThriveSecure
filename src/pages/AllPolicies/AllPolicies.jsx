@@ -18,7 +18,7 @@ const AllPolicies = () => {
     const { data, isLoading } = useQuery({
         queryKey: ["policies", currentPage, selectedCategory],
         queryFn: async () => {
-            const res = await axiosInstance.get(`/policies?page=${currentPage}&limit=${limit}`);
+            const res = await axiosInstance.get(`policies?page=${currentPage}&limit=${limit}`);
             return res.data;
         },
         keepPreviousData: true,

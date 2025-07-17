@@ -161,13 +161,13 @@ const MyPolicies = () => {
                                         </button>
                                         <button
                                             onClick={() => {
-                                                if (policy.paymentStatus === "Paid") {
+                                                if (policy.paymentStatus === "paid") {
                                                     setSelectedPolicy(policy);
                                                     document.getElementById("review_modal").showModal();
                                                 }
                                             }}
-                                            disabled={policy.paymentStatus !== "Paid"}
-                                            className={`btn btn-sm flex items-center gap-1 tooltip ${policy.paymentStatus === "Paid"
+                                            disabled={policy.paymentStatus !== "paid"}
+                                            className={`btn btn-sm flex items-center gap-1 tooltip ${policy.paymentStatus === "paid"
                                                 ? "btn-outline btn-accent"
                                                 : "btn-disabled cursor-not-allowed"
                                                 }`}
@@ -178,12 +178,12 @@ const MyPolicies = () => {
 
                                         <button
                                             onClick={() => {
-                                                if (policy.paymentStatus === "Paid") {
+                                                if (policy.paymentStatus === "paid") {
                                                     downloadPDF(policy);
                                                 }
                                             }}
-                                            disabled={policy.paymentStatus !== "Paid"}
-                                            className={`btn btn-sm flex items-center gap-1 tooltip ${policy.paymentStatus === "Paid"
+                                            disabled={policy.paymentStatus !== "paid"}
+                                            className={`btn btn-sm flex items-center gap-1 tooltip ${policy.paymentStatus === "paid"
                                                 ? "btn-success"
                                                 : "btn-disabled cursor-not-allowed"
                                                 }`}

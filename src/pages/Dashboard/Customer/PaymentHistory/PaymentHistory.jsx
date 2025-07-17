@@ -1,24 +1,19 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { FaMoneyBillWave, FaCreditCard, FaCheckCircle, FaClock } from "react-icons/fa";
-import useAxios from "../../../../hooks/useAxios/useAxios";
+import { FaCreditCard, FaCheckCircle, FaClock } from "react-icons/fa";
 import useAuth from "../../../../hooks/useAuth/useAuth";
-
-// Stripe public key
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 
 const ProfileHistory = () => {
-    const axiosInstance = useAxios();
+    const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
 
     const { data: policies = [], isLoading } = useQuery({
         queryKey: ["approvedPolicies", user?.email],
         queryFn: async () => {
-            const res = await axiosInstance.get(`/applications?email=${user?.email}&status=Approved`);
+            const res = await axiosSecure.get(`applications?email=${user?.email}&status=Approved`);
             return res.data.applications;
         },
         enabled: !!user?.email,
@@ -73,19 +68,19 @@ const ProfileHistory = () => {
                                     <td>
                                         <span
                                             className={`badge text-xs font-bold
-                                            ${policy.paymentStatus === "Due" && "badge-warning"}
-                                            ${policy.paymentStatus === "Paid" && "badge-success"}
+                                            ${policy.paymentStatus === "due" && "badge-warning"}
+                                            ${policy.paymentStatus === "paid" && "badge-success"}
                                         `}
                                         >
-                                            {policy.paymentStatus === "Paid" ? (
-                                                <span className="flex items-center gap-1"><FaCheckCircle /> Paid</span>
+                                            {policy.paymentStatus === "paid" ? (
+                                                <span className="flex items-center gap-1 uppercase"><FaCheckCircle /> paid</span>
                                             ) : (
-                                                <span className="flex items-center gap-1"><FaClock /> Due</span>
+                                                <span className="flex items-center gap-1 uppercase"><FaClock /> due</span>
                                             )}
                                         </span>
                                     </td>
                                     <td className="py-2">
-                                        {policy.paymentStatus === "Due" ? (
+                                        {policy.paymentStatus === "due" ? (
                                             <Link
                                                 to={`/dashboard/payment/${policy._id}`}
                                                 className="btn btn-sm btn-primary tooltip"
@@ -96,9 +91,9 @@ const ProfileHistory = () => {
                                         ) : (
                                             <button
                                                 disabled
-                                                className="btn btn-sm btn-success opacity-70 cursor-not-allowed"
+                                                className="btn btn-sm btn-success opacity-70 cursor-not-allowed uppercase"
                                             >
-                                                Paid
+                                                paid
                                             </button>
                                         )}
                                     </td>

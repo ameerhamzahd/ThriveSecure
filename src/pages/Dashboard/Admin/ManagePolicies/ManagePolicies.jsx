@@ -19,7 +19,7 @@ const ManagePolicies = () => {
     const { data: policies = [], isLoading } = useQuery({
         queryKey: ["policies", currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/policies?page=${currentPage}&limit=${limit}`);
+            const res = await axiosSecure.get(`policies?page=${currentPage}&limit=${limit}`);
             setTotalPages(res.data.totalPages);
             return res.data.policies;
         },
@@ -37,7 +37,7 @@ const ManagePolicies = () => {
             confirmButtonText: "Yes, delete it!"
         });
         if (confirm.isConfirmed) {
-            await axiosSecure.delete(`/policies/${id}`);
+            await axiosSecure.delete(`policies/${id}`);
             queryClient.invalidateQueries(["policies", currentPage]);
             Swal.fire("Deleted!", "Policy has been deleted.", "success");
         }
@@ -95,11 +95,11 @@ const ManagePolicies = () => {
                     <tbody>
                         {isLoading ? (
                             <tr>
-                                <td colSpan="4" className="text-center py-10 text-gray-500">Loading policies...</td>
+                                <td colSpan="5" className="text-center py-10 text-gray-500">Loading policies...</td>
                             </tr>
                         ) : policies.length === 0 ? (
                             <tr>
-                                <td colSpan="4" className="text-center py-10 text-gray-500">No policies found.</td>
+                                <td colSpan="5" className="text-center py-10 text-gray-500">No policies found.</td>
                             </tr>
                         ) : (
                             policies.map(policy => (

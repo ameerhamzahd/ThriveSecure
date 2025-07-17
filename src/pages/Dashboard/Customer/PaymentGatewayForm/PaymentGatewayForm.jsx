@@ -1,33 +1,49 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
-import useAxios from "../../../../hooks/useAxios/useAxios";
 import { motion } from "motion/react";
 import { FaCreditCard, FaLock, FaCheckCircle, FaShieldAlt } from "react-icons/fa";
 import useAuth from "../../../../hooks/useAuth/useAuth";
 import StepProgress from "../../../../components/shared/StepProgress/StepProgress";
+import { useParams, useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
+import Loader from "../../../../components/shared/Loader/Loader";
 
-const PaymentGatewayForm = ({ price, policyId, policyName }) => {
+const PaymentGatewayForm = () => {
     const stripe = useStripe();
     const elements = useElements();
-    const axiosSecure = useAxios();
+    const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!stripe || !elements) return;
+    const { data: policy, isLoading } = useQuery({
+        queryKey: ["paymentPolicy", id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`applications/${id}`);
+            return res.data;
+        },
+        enabled: !!id,
+    });
 
+    const { handleSubmit } = useForm();
+
+    const onSubmit = async () => {
+        if (!stripe || !elements || !policy) return;
         setLoading(true);
         setError("");
         setSuccess("");
 
         try {
             // 1️⃣ Create Payment Intent
-            const { data } = await axiosSecure.post("/api/payment/create-payment-intent", {
-                amount: price * 100,
+            const { data } = await axiosSecure.post("create-payment-intent", {
+                amount: policy.policyDetails.basePremiumRate * 100,
                 currency: "usd",
             });
 
@@ -47,18 +63,41 @@ const PaymentGatewayForm = ({ price, policyId, policyName }) => {
 
             if (stripeError) {
                 setError(stripeError.message);
+            
+                // 🟡 Store failed transaction
+                await axiosSecure.post("transactions", {
+                    paymentIntentId: paymentIntent?.id || "N/A",
+                    amount: policy.policyDetails.basePremiumRate * 100,
+                    currency: "usd",
+                    userEmail: user?.email,
+                    policyId: id,
+                    policyName: policy.policyDetails.title,
+                    status: "failed",
+                    date: new Date().toISOString(),
+                    failureReason: stripeError.message,
+                });
             } else if (paymentIntent.status === "succeeded") {
                 setSuccess("Payment successful! Thank you.");
 
-                // 3️⃣ Update DB, confirm transaction, activate policy
-                await axiosSecure.post("/api/payment/confirm-payment", {
+                // 3️⃣ Store Transaction
+                await axiosSecure.post("transactions", {
                     paymentIntentId: paymentIntent.id,
                     amount: paymentIntent.amount,
                     currency: paymentIntent.currency,
                     userEmail: user?.email,
-                    policyId: policyId,
+                    policyId: id,
+                    policyName: policy.policyDetails.title,
                     status: "paid",
+                    date: new Date().toISOString(),
                 });
+
+                // 4️⃣ Update Payment Status in Application
+                await axiosSecure.patch(`applications/${id}`, {
+                    paymentStatus: "paid",
+                });
+
+                Swal.fire("Success!", "Your payment was successful.", "success");
+                navigate("/dashboard/payment-history");
             }
         } catch (err) {
             setError(err.message);
@@ -67,10 +106,16 @@ const PaymentGatewayForm = ({ price, policyId, policyName }) => {
         }
     };
 
+    if (isLoading) {
+        return (
+            <Loader></Loader>
+        );
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <motion.form
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(onSubmit)}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -80,15 +125,14 @@ const PaymentGatewayForm = ({ price, policyId, policyName }) => {
                     <FaCreditCard /> Secure Payment
                 </h2>
                 <p className="text-center text-gray-600 mb-4">
-                    Complete your premium payment of <span className="font-semibold text-blue-700">${price}</span> to activate your policy.
+                    Complete your premium payment of <span className="font-semibold text-blue-700">${policy.policyDetails.basePremiumRate}</span> to activate your policy.
                 </p>
 
-                {/* Policy Name (read-only) */}
                 <div className="flex items-center gap-2 bg-gray-50 rounded-lg border border-gray-200 p-3">
                     <FaShieldAlt className="text-blue-700" />
                     <input
                         type="text"
-                        value={policyName}
+                        value={policy.policyDetails.title}
                         readOnly
                         className="bg-transparent outline-none w-full text-gray-700 font-medium"
                     />
@@ -127,7 +171,7 @@ const PaymentGatewayForm = ({ price, policyId, policyName }) => {
                         </>
                     ) : (
                         <>
-                            <FaLock /> Pay ${price}
+                            <FaLock /> Pay ${policy.policyDetails.basePremiumRate}
                         </>
                     )}
                 </motion.button>

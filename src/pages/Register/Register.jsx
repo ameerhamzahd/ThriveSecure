@@ -71,7 +71,7 @@ const Register = () => {
                 lastLogin: new Date().toISOString()
             };
 
-            await axiosInstance.post("/users", userInfo);
+            await axiosInstance.post("users", userInfo);
 
             toast.success("Registration successful!", { transition: Bounce });
             navigate(location.state || "/");
@@ -92,7 +92,7 @@ const Register = () => {
                 lastLogin: new Date().toISOString()
             };
 
-            await axiosInstance.post("/users", userInfo);
+            await axiosInstance.post("users", userInfo);
 
             toast.success("Registration successful!", { transition: Bounce });
             navigate(location.state || "/");

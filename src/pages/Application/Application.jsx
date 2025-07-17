@@ -40,7 +40,7 @@ const Application = () => {
                 policyId: id,
                 policyDetails: policy, // attach fetched policy details
                 status: "Pending",
-                paymentStatus: "Due",
+                paymentStatus: "due",
                 createdAt: new Date().toISOString(),
             };
 

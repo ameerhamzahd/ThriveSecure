@@ -17,7 +17,7 @@ const ManageAgents = () => {
     const { data: users = [], isLoading } = useQuery({
         queryKey: ["agents", activeTab, currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/agents?status=${activeTab}&page=${currentPage}&limit=${limit}`);
+            const res = await axiosSecure.get(`agents?status=${activeTab}&page=${currentPage}&limit=${limit}`);
             setTotalPages(res.data.totalPages);
             return res.data.users;
         },
@@ -35,7 +35,7 @@ const ManageAgents = () => {
             confirmButtonText: "Yes, Approve"
         });
         if (confirm.isConfirmed) {
-            await axiosSecure.patch(`/users/${user._id}/approve-agent`);
+            await axiosSecure.patch(`users/${user._id}/approve-agent`);
             queryClient.invalidateQueries(["agents"]);
             Swal.fire("Approved!", `${user.name} is now an agent.`, "success");
         }
@@ -52,7 +52,7 @@ const ManageAgents = () => {
             confirmButtonText: "Yes, Reject"
         });
         if (confirm.isConfirmed) {
-            await axiosSecure.patch(`/users/${user._id}/reject-agent`);
+            await axiosSecure.patch(`users/${user._id}/reject-agent`);
             queryClient.invalidateQueries(["agents"]);
             Swal.fire("Rejected!", `Agent application rejected for ${user.name}.`, "success");
         }
@@ -69,7 +69,7 @@ const ManageAgents = () => {
             confirmButtonText: "Yes, Demote"
         });
         if (confirm.isConfirmed) {
-            await axiosSecure.patch(`/users/${user._id}/demote-agent`);
+            await axiosSecure.patch(`users/${user._id}/demote-agent`);
             queryClient.invalidateQueries(["agents"]);
             Swal.fire("Demoted!", `${user.name} has been demoted to customer.`, "success");
         }

@@ -27,7 +27,7 @@ const NewsletterSubscription = () => {
         subscribedAt: new Date().toISOString(),
       };
 
-      const res = await axiosInstance.post("/newsletter-subscriptions", subscriptionData);
+      const res = await axiosInstance.post("newsletter-subscriptions", subscriptionData);
 
       if (res.data.insertedId || res.data.success) {
         setIsSuccess(true);

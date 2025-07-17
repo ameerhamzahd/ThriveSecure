@@ -10,7 +10,7 @@ const Articles = ({ blogs }) => {
 
     const handleReadMore = async (blog) => {
         try {
-            await axiosInstance.patch(`/blogs/${blog._id}/increment`);
+            await axiosInstance.patch(`blogs/${blog._id}/increment`);
             setSelectedBlog(blog);
         } catch (error) {
             console.error(error);

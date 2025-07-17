@@ -29,7 +29,7 @@ const ManageTransactions = () => {
         setFilters((prev) => ({ ...prev, [name]: value }));
     };
 
-    const { data: transactions = [], refetch, isLoading } = useQuery({
+    const { data = {}, refetch, isLoading } = useQuery({
         queryKey: ["transactions", currentPage, filters],
         queryFn: async () => {
             const params = new URLSearchParams({
@@ -40,25 +40,20 @@ const ManageTransactions = () => {
                 ...(filters.user && { user: filters.user }),
                 ...(filters.policy && { policy: filters.policy }),
             });
-            const res = await axiosSecure.get(`/transactions?${params.toString()}`);
+            const res = await axiosSecure.get(`transactions?${params.toString()}`);
             setTotalPages(res.data.totalPages);
-            return res.data.transactions;
+            return res.data;
         },
         keepPreviousData: true,
     });
 
-    const { data: summary = {}, isLoading: isSummaryLoading } = useQuery({
-        queryKey: ["transactions-summary"],
-        queryFn: async () => {
-            const res = await axiosSecure.get("/transactions/summary");
-            return res.data;
-        },
-        staleTime: 5 * 60 * 1000 // cache for 5 minutes
-    });
+    const transactions = data.transactions || [];
+    const summary = data.summary || {};
+    const isSummaryLoading = isLoading;
 
     const earningsData = transactions.map((txn) => ({
         date: new Date(txn.date).toLocaleDateString(),
-        amount: txn.amount,
+        amount: parseFloat((txn.amount / 100).toFixed(2)),
     }));
 
     return (
@@ -132,7 +127,7 @@ const ManageTransactions = () => {
                             <XAxis dataKey="date" />
                             <YAxis />
                             <Tooltip />
-                            <Line type="monotone" dataKey="amount" stroke="#3b82f6" strokeWidth={2} />
+                            <Line type="basis" dataKey="amount" stroke="#3b82f6" strokeWidth={2} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
@@ -218,15 +213,16 @@ const ManageTransactions = () => {
                         ) : (
                             transactions.map((txn) => (
                                 <tr key={txn._id} className="border-b hover:bg-blue-50">
-                                    <td className="text-xs break-all">{txn.transactionId}</td>
+                                    <td className="text-xs break-all">{txn.paymentIntentId}</td>
                                     <td className="text-sm">{txn.userEmail}</td>
                                     <td className="text-sm">{txn.policyName}</td>
                                     <td className="text-sm text-green-600 font-semibold flex items-center gap-1">
-                                        <FaDollarSign />{txn.amount}
+                                        <FaDollarSign />
+                                        {parseFloat((txn.amount / 100).toFixed(2))}
                                     </td>
                                     <td className="text-sm">{new Date(txn.date).toLocaleDateString()}</td>
                                     <td>
-                                        <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${txn.status === "Success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                                        <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${txn.status === "paid" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
                                             {txn.status}
                                         </span>
                                     </td>

@@ -27,29 +27,15 @@ const PolicyQuote = () => {
 
     const calculatePremium = ({ age, gender, coverage, duration, smoker }) => {
         let base = policy.basePremiumRate || 500; // base monthly
-
-        // Age factor: increases 1% per year over 25
         const ageFactor = age > 25 ? (age - 25) * 0.01 : 0;
-
-        // Smoker surcharge: 20% more
         const smokerFactor = smoker === 'yes' ? 0.2 : 0;
-
-        // Gender factor: 5% more for male (if business logic requires)
         const genderFactor = gender === 'male' ? 0.05 : 0;
-
-        // Coverage multiplier: premium increases proportionally to coverage amount
-        const coverageMultiplier = coverage / 100000; // e.g., $100,000 => 1x, $200,000 => 2x
-
-        // Duration multiplier: longer terms slightly increase premium (0.5% per year)
+        const coverageMultiplier = coverage / 100000;
         const durationFactor = duration * 0.005;
-
         const totalMultiplier = 1 + ageFactor + smokerFactor + genderFactor + durationFactor;
-
         const premium = base * coverageMultiplier * totalMultiplier;
-
         return Math.round(premium);
     };
-
 
     const formatCurrency = (amount) => `$${amount.toLocaleString()}`;
 
@@ -83,38 +69,61 @@ const PolicyQuote = () => {
     };
 
     if (isLoading) return <Loader />;
-    if (isError) return <div className="min-h-screen flex justify-center items-center"><p className="text-red-600">Failed to load policy data.</p></div>;
+    if (isError || !policy) return <div className="min-h-screen flex justify-center items-center"><p className="text-red-600">Failed to load policy data.</p></div>;
 
-    /** Extract min/max values safely */
-    const [coverageMin, coverageMax] = policy.coverageRange
-        ? policy.coverageRange.match(/\d+/g)?.map(Number) || [10000, 1000000]
-        : [50000, 1000000];
+    let coverageMin = 50000;
+    let coverageMax = 1000000;
+    let durationMin = 5;
+    let durationMax = 40;
 
-    const [durationMin, durationMax] = policy.durationOptions
-        ? policy.durationOptions.match(/\d+/g)?.map(Number) || [5, 50]
-        : [5, 40];
+    if (policy.coverageRange) {
+        if (Array.isArray(policy.coverageRange)) {
+            if (policy.coverageRange.length >= 2) {
+                [coverageMin, coverageMax] = policy.coverageRange;
+            } else if (policy.coverageRange.length === 1) {
+                coverageMin = policy.coverageRange[0];
+                coverageMax = policy.coverageRange[0];
+            }
+        } else if (typeof policy.coverageRange === "string") {
+            const nums = policy.coverageRange.match(/\\d+/g)?.map(Number);
+            if (nums && nums.length >= 2) {
+                [coverageMin, coverageMax] = nums;
+            } else if (nums && nums.length === 1) {
+                coverageMin = nums[0];
+                coverageMax = nums[0];
+            }
+        }
+    }    
+
+    if (policy.durationOptions) {
+        if (Array.isArray(policy.durationOptions)) {
+            [durationMin, durationMax] = policy.durationOptions;
+        } else if (typeof policy.durationOptions === "string") {
+            const nums = policy.durationOptions.match(/\d+/g)?.map(Number);
+            if (nums && nums.length >= 2) [durationMin, durationMax] = nums;
+        }
+    }
 
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-28">
             <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-10 justify-items-center">
-                {/* QuoteEstimator Form */}
                 <motion.div
                     initial={{ opacity: 0, x: -40 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
                     className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg"
                 >
-                    <h1 className="text-2xl font-bold text-center mb-4">Get Your Free Quote for <p className='text-blue-800'>{policy.title}</p></h1>
-                    <p className="text-gray-600 text-center mb-6">Estimate your premium easily before applying</p>
+                    <h1 className="text-2xl font-bold text-center mb-4">Get Your Free Quote for <span className='text-blue-800'>{policy.title || "Selected Policy"}</span></h1>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         <div>
                             <label className="block mb-1 font-medium">Age</label>
                             <input
                                 type="number"
                                 className="input input-bordered w-full"
-                                {...register("age", { required: true, min: policy.minAge, max: policy.maxAge })}
+                                {...register("age", { required: true, min: policy.minAge || 18, max: policy.maxAge || 65 })}
+                                placeholder={`E.g., ${policy.minAge || 18} - ${policy.maxAge || 65}`}
                             />
-                            {errors.age && <span className="text-red-500 text-sm">Valid age: {policy.minAge}-{policy.maxAge}.</span>}
+                            {errors.age && <span className="text-red-500 text-sm">Valid age: {policy.minAge || 18}-{policy.maxAge || 65}.</span>}
                         </div>
                         <div>
                             <label className="block mb-1 font-medium">Gender</label>
@@ -129,7 +138,7 @@ const PolicyQuote = () => {
                                 type="number"
                                 className="input input-bordered w-full"
                                 {...register("coverage", { required: true, min: coverageMin, max: coverageMax })}
-                                placeholder={`E.g., ${policy.coverageRange}`}
+                                placeholder={`E.g., ${coverageMin.toLocaleString()} - ${coverageMax.toLocaleString()}`}
                             />
                             {errors.coverage && <span className="text-red-500 text-sm">Valid coverage: ${coverageMin.toLocaleString()} - ${coverageMax.toLocaleString()}.</span>}
                         </div>
@@ -139,7 +148,7 @@ const PolicyQuote = () => {
                                 type="number"
                                 className="input input-bordered w-full"
                                 {...register("duration", { required: true, min: durationMin, max: durationMax })}
-                                placeholder={`E.g., ${policy.durationOptions}`}
+                                placeholder={`E.g., ${durationMin} - ${durationMax} years`}
                             />
                             {errors.duration && <span className="text-red-500 text-sm">Valid duration: {durationMin}-{durationMax} years.</span>}
                         </div>
@@ -151,13 +160,11 @@ const PolicyQuote = () => {
                             </select>
                         </div>
                         <button type="submit" className="btn bg-blue-800 text-white w-full hover:opacity-90">Estimate Premium</button>
-                        <button type="button" onClick={() => navigate(`/application/${policy._id}`)} className="btn btn-outline btn-accent w-full mt-2">Apply for Policy</button>
-
+                        <button type="button" onClick={() => navigate(`/application/${policy._id || id}`)} className="btn btn-outline btn-accent w-full mt-2">Apply for Policy</button>
                         <StepProgress currentStep={1} />
                     </form>
                 </motion.div>
 
-                {/* Lottie Animation */}
                 <motion.div
                     initial={{ opacity: 0, x: 40 }}
                     animate={{ opacity: 1, x: 0 }}

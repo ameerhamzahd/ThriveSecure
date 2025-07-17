@@ -26,7 +26,7 @@ const ManageApplications = () => {
     const { data: agents = [] } = useQuery({
         queryKey: ["agents"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/users?role=agent");
+            const res = await axiosSecure.get("users?role=agent");
             return res.data.users;
         },
     });
