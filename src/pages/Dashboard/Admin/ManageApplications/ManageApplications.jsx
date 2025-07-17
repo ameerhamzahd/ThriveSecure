@@ -106,11 +106,11 @@ const ManageApplications = () => {
                                     <td className="text-sm">{new Date(app.createdAt).toLocaleDateString()}</td>
                                     <td>
                                         <span className={`badge text-xs font-bold
-                                            ${app.status === "Pending" && "badge-warning"} 
-                                            ${app.status === "Approved" && "badge-success"} 
-                                            ${app.status === "Rejected" && "badge-error text-white"} 
+                                            ${app.adminAssignStatus === "Pending" && "badge-warning"} 
+                                            ${app.adminAssignStatus === "Approved" && "badge-success"} 
+                                            ${app.adminAssignStatus === "Rejected" && "badge-error text-white"} 
                                         `}>
-                                            {app.status}
+                                            {app.adminAssignStatus}
                                         </span>
                                     </td>
                                     <td>

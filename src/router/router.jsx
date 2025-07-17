@@ -20,6 +20,7 @@ import AllPolicies from '../pages/AllPolicies/AllPolicies';
 import PolicyDetails from '../pages/PolicyDetails/PolicyDetails';
 import MyPolicies from '../pages/Dashboard/Customer/MyPolicies/MyPolicies';
 import ProfileHistory from '../pages/Dashboard/Customer/PaymentHistory/PaymentHistory';
+import AssignedCustomers from '../pages/Dashboard/Agent/AssignedCustomers/AssignedCustomers';
 
 export const router = createBrowserRouter([
   {
@@ -95,7 +96,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "assigned-customers",
-        Component: PaymentGateway
+        Component: AssignedCustomers
       },
       {
         path: "manage-blogs",

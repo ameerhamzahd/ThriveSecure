@@ -13,7 +13,7 @@ const ProfileHistory = () => {
     const { data: policies = [], isLoading } = useQuery({
         queryKey: ["approvedPolicies", user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`applications?email=${user?.email}&status=Approved`);
+            const res = await axiosSecure.get(`applications?email=${user?.email}&agentAssignStatus=Approved`);
             return res.data.applications;
         },
         enabled: !!user?.email,
@@ -80,7 +80,7 @@ const ProfileHistory = () => {
                                         </span>
                                     </td>
                                     <td className="py-2">
-                                        {policy.paymentStatus === "due" ? (
+                                        {policy.paymentStatus === "due" && policy.agentAssignStatus === "Approved" ? (
                                             <Link
                                                 to={`/dashboard/payment/${policy._id}`}
                                                 className="btn btn-sm btn-primary tooltip"

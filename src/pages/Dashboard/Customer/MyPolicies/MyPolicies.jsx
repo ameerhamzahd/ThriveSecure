@@ -94,7 +94,7 @@ const MyPolicies = () => {
                 [`Coverage:`, policy.policyDetails.coverageRange],
                 [`Duration:`, policy.policyDetails.durationOptions],
                 [`Premium:`, `$${policy.policyDetails.basePremiumRate}/month`],
-                [`Status:`, policy.status],
+                [`Status:`, policy.agentAssignStatus],
                 [`Issued On:`, new Date(policy.createdAt).toLocaleDateString()],
             ];
 
@@ -151,8 +151,8 @@ const MyPolicies = () => {
                                     <td className="py-3 text-sm">{policy.policyDetails.durationOptions}</td>
                                     <td className="py-3 text-sm">${policy.policyDetails.basePremiumRate}</td>
                                     <td>
-                                        <span className={`badge text-xs font-bold ${policy.status === "Pending" && "badge-warning"} ${policy.status === "Approved" && "badge-success"} ${policy.status === "Rejected" && "badge-error text-white"}`}>
-                                            {policy.status}
+                                        <span className={`badge text-xs font-bold ${policy.agentAssignStatus === "Pending" && "badge-warning"} ${policy.agentAssignStatus === "Approved" && "badge-success"} ${policy.agentAssignStatus === "Rejected" && "badge-error text-white"}`}>
+                                            {policy.agentAssignStatus}
                                         </span>
                                     </td>
                                     <td className="flex flex-wrap gap-2 py-2">
@@ -167,7 +167,7 @@ const MyPolicies = () => {
                                                 }
                                             }}
                                             disabled={policy.paymentStatus !== "paid"}
-                                            className={`btn btn-sm flex items-center gap-1 tooltip ${policy.paymentStatus === "paid"
+                                            className={`btn btn-sm flex items-center gap-1 tooltip ${policy.paymentStatus === "paid" && policy.agentAssignStatus === "Approved"
                                                 ? "btn-outline btn-accent"
                                                 : "btn-disabled cursor-not-allowed"
                                                 }`}
@@ -249,10 +249,10 @@ const MyPolicies = () => {
                         Policy Details: {selectedPolicy?.policyDetails?.title}
                     </h3>
                     <div className="space-y-2 text-sm">
-                        <p><strong>Coverage:</strong> ${selectedPolicy?.policyDetails?.coverageRange}</p>
+                        <p><strong>Coverage:</strong> {selectedPolicy?.policyDetails?.coverageRange}</p>
                         <p><strong>Duration:</strong> {selectedPolicy?.policyDetails?.durationOptions}</p>
                         <p><strong>Premium:</strong> ${selectedPolicy?.policyDetails?.basePremiumRate}/month</p>
-                        <p><strong>Status:</strong> {selectedPolicy?.status}</p>
+                        <p><strong>Status:</strong> {selectedPolicy?.agentAssignStatus}</p>
                     </div>
                     <div className="modal-action">
                         <form method="dialog" className="w-full">

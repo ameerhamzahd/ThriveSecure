@@ -39,7 +39,8 @@ const Application = () => {
                 ...data,
                 policyId: id,
                 policyDetails: policy, // attach fetched policy details
-                status: "Pending",
+                adminAssignStatus: "Pending",
+                agentAssignStatus: "Pending",
                 paymentStatus: "due",
                 createdAt: new Date().toISOString(),
             };
