@@ -51,11 +51,11 @@ const MyPolicies = () => {
         const reviewData = {
             policyId: selectedPolicy._id,
             userImage: selectedPolicy.photoURL,
+            applicantName: selectedPolicy.applicantName,
             rating: data.rating,
             feedback: data.feedback,
             createdAt: new Date().toISOString(),
         };
-        console.log(reviewData)
         submitReview.mutate(reviewData);
     };
 
@@ -237,7 +237,6 @@ const MyPolicies = () => {
                                 Cancel
                             </button>
                         </div>
-
                     </form>
                 </div>
             </dialog>

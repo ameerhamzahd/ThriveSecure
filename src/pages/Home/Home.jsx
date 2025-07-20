@@ -3,6 +3,7 @@ import BannerSlider from '../../components/BannerSlider/BannerSlider';
 import BenefitsSection from '../../components/BenefitsSection/BenefitsSection';
 import NewsletterSubscription from '../../components/NewsletterSubscription/NewsletterSubscription';
 import PopularPolicies from '../../components/PopularPolicies/PopularPolicies';
+import CustomerReviews from '../../components/CustomerReviews/CustomerReviews';
 
 const Home = () => {
     return (
@@ -13,6 +14,10 @@ const Home = () => {
 
             <div>
                 <PopularPolicies></PopularPolicies>
+            </div>
+
+            <div>
+                <CustomerReviews></CustomerReviews>
             </div>
 
             <div>

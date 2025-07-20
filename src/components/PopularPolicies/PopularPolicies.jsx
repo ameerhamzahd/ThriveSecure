@@ -29,7 +29,7 @@ const PopularPolicies = () => {
     const policies = data.policies || [];
 
     return (
-        <section className="pt-16 lg:pt-20 bg-white relative overflow-hidden">
+        <section className="py-15 lg:pt-20 bg-white relative overflow-hidden">
             <div className="max-w-11/12 mx-auto relative z-10 px-4">
                 {/* Section Header */}
                 <motion.div
@@ -65,7 +65,7 @@ const PopularPolicies = () => {
                             responsive={responsive}
                             infinite
                             autoPlay
-                            autoPlaySpeed={4000}
+                            autoPlaySpeed={5000}
                             keyBoardControl
                             customTransition="transform 300ms ease-in-out"
                             transitionDuration={300}
@@ -73,7 +73,7 @@ const PopularPolicies = () => {
                             arrows
                             showDots
                             renderDotsOutside
-                            className="py-12"
+                            className="py-8"
                             customLeftArrow={
                                 <button className="cursor-pointer absolute left-0 top-1/3 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-blue-800 hover:bg-blue-800 hover:text-white transition">
                                     <FaArrowRight className="w-5 h-5 rotate-180" />
@@ -85,7 +85,7 @@ const PopularPolicies = () => {
                                 </button>
                             }
                         >
-                            {policies.map((policy, index) => (
+                            {policies.map((policy) => (
                                 <motion.div
                                     key={policy._id}
                                     whileHover={{ scale: 1.02 }}
