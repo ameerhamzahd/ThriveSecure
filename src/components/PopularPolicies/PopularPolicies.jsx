@@ -25,7 +25,7 @@ const PopularPolicies = () => {
             return res.data;
         },
     });
-    
+
     const policies = data.policies || [];
 
     return (
@@ -40,9 +40,9 @@ const PopularPolicies = () => {
                     viewport={{ once: true }}
                 >
                     <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        Popular{" "}Policies{" "}of{" "}
+                        Popular{" "}
                         <span className="bg-gradient-to-r from-blue-800 to-accent bg-clip-text text-transparent">
-                            ThriveSecure
+                            Policies
                         </span>
                     </h2>
                     <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">

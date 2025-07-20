@@ -92,7 +92,7 @@ const LatestArticles = () => {
                 <div className="flex justify-center mt-12">
                     <Link
                         to="/articles"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 text-white hover:bg-blue-800 transition font-semibold shadow"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full btn btn-accent btn-md text-white transition font-semibold shadow"
                     >
                         View All Articles <FaArrowRight />
                     </Link>
