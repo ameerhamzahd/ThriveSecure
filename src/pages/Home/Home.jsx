@@ -4,6 +4,7 @@ import BenefitsSection from '../../components/BenefitsSection/BenefitsSection';
 import NewsletterSubscription from '../../components/NewsletterSubscription/NewsletterSubscription';
 import PopularPolicies from '../../components/PopularPolicies/PopularPolicies';
 import CustomerReviews from '../../components/CustomerReviews/CustomerReviews';
+import LatestArticles from '../../components/LatestArticles/LatestArticles';
 
 const Home = () => {
     return (
@@ -18,6 +19,10 @@ const Home = () => {
 
             <div>
                 <CustomerReviews></CustomerReviews>
+            </div>
+
+            <div>
+                <LatestArticles></LatestArticles>
             </div>
 
             <div>

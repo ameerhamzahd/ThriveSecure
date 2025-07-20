@@ -43,7 +43,7 @@ const NewsletterSubscription = () => {
   };
 
   return (
-    <section className="pt-15 lg:pt-20 bg-white relative overflow-hidden">
+    <section className="pb-15 lg:pb-20 bg-white relative overflow-hidden">
       {/* Background Animated Grid Decorations */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 opacity-10">

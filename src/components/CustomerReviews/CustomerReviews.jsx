@@ -82,10 +82,10 @@ const CustomerReviews = () => {
                                 <motion.div
                                     key={review._id}
                                     whileHover={{ scale: 1.02 }}
-                                    className="bg-white shadow rounded-2xl overflow-hidden flex flex-col mx-2 p-6 relative"
+                                    className="bg-white shadow rounded-2xl overflow-hidden flex flex-col mx-2 p-8 relative"
                                 >
-                                    <FaQuoteLeft className="absolute top-4 left-4 text-blue-200 text-3xl" />
-                                    <FaQuoteRight className="absolute bottom-4 right-4 text-blue-200 text-3xl" />
+                                    <FaQuoteLeft className="absolute top-4 left-8 text-blue-200 text-3xl" />
+                                    <FaQuoteRight className="absolute bottom-4 right-8 text-blue-200 text-3xl" />
 
                                     <div className="flex flex-row-reverse items-center gap-5 mb-4">
                                         <img
