@@ -8,8 +8,8 @@ import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import Loader from "../../components/shared/Loader/Loader";
 
 const responsive = {
-    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3 },
-    tablet: { breakpoint: { max: 1024, min: 640 }, items: 2 },
+    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1 },
+    tablet: { breakpoint: { max: 1024, min: 640 }, items: 1 },
     mobile: { breakpoint: { max: 640, min: 0 }, items: 1 },
 };
 
@@ -68,12 +68,12 @@ const CustomerReviews = () => {
                             removeArrowOnDeviceType={["tablet", "mobile"]}
                             className="py-8"
                             customLeftArrow={
-                                <button className="absolute left-0 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-blue-800 hover:bg-blue-800 hover:text-white transition-all duration-300 z-10 cursor-pointer">
+                                <button className="absolute left-50 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-blue-800 hover:bg-blue-800 hover:text-white transition-all duration-300 z-10 cursor-pointer">
                                   <FaArrowRight className="w-5 h-5 rotate-180" />
                                 </button>
                               }
                               customRightArrow={
-                                <button className="absolute right-0 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-blue-800 hover:bg-blue-800 hover:text-white transition-all duration-300 z-10 cursor-pointer">
+                                <button className="absolute right-50 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-blue-800 hover:bg-blue-800 hover:text-white transition-all duration-300 z-10 cursor-pointer">
                                   <FaArrowRight className="w-5 h-5" />
                                 </button>
                               }
@@ -81,7 +81,7 @@ const CustomerReviews = () => {
                             {reviews.map((review) => (
                                 <motion.div
                                     key={review._id}
-                                    className="bg-white shadow rounded-2xl overflow-hidden flex flex-col mx-2 p-8 relative"
+                                    className="bg-white max-w-2xl mx-auto shadow rounded-2xl overflow-hidden flex flex-col p-8 relative"
                                 >
                                     <FaQuoteLeft className="absolute top-4 left-8 text-blue-200 text-3xl" />
                                     <FaQuoteRight className="absolute bottom-4 right-8 text-blue-200 text-3xl" />

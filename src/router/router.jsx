@@ -26,6 +26,7 @@ import Articles from '../pages/Articles/Articles';
 import ClaimRequest from '../pages/Dashboard/Customer/ClaimRequest/ClaimRequest';
 import PolicyClearance from '../pages/Dashboard/Agent/PolicyClearance/PolicyClearance';
 import FAQ from '../pages/FAQ/FAQ';
+import Profile from '../pages/Dashboard/Shared/Profile/Profile';
 
 export const router = createBrowserRouter([
   {
@@ -133,7 +134,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "profile",
-        Component: PaymentGateway
+        Component: Profile
       },
     ]
   }
