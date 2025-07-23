@@ -96,19 +96,19 @@ const Profile = () => {
         switch (role) {
             case "admin":
                 return (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-100 text-red-700 text-xs">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-200 text-xs">
                         <FaUserShield /> Admin
                     </span>
                 );
             case "agent":
                 return (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-xs">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-xs">
                         <FaUserTie /> Agent
                     </span>
                 );
             default:
                 return (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-neutral text-white text-xs">
                         <FaUser /> Customer
                     </span>
                 );
