@@ -30,6 +30,7 @@ import Profile from '../pages/Dashboard/Shared/Profile/Profile';
 import TermsOfServices from '../pages/TermsOfServices/TermsOfServices';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
+import AboutUs from '../pages/AboutUs/AboutUs';
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
       {
         path: "cookie-policy",
         Component: CookiePolicy
+      },
+      {
+        path: "about-us",
+        Component: AboutUs
       },
     ]
   },
