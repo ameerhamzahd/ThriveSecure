@@ -27,6 +27,7 @@ import ClaimRequest from '../pages/Dashboard/Customer/ClaimRequest/ClaimRequest'
 import PolicyClearance from '../pages/Dashboard/Agent/PolicyClearance/PolicyClearance';
 import FAQ from '../pages/FAQ/FAQ';
 import Profile from '../pages/Dashboard/Shared/Profile/Profile';
+import TermsOfServices from '../components/TermsOfServices/TermsOfServices';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: "faq",
         Component: FAQ
+      },
+      {
+        path: "terms-of-services",
+        Component: TermsOfServices
       },
     ]
   },

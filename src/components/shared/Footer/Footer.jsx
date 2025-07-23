@@ -20,11 +20,11 @@ const Footer = () => {
     const articles = <>
         <li><NavLink to="/about-us" className={navLinkStyle}>About Us</NavLink></li>
         <li><NavLink to="/contact-us" className={navLinkStyle}>Contact Us</NavLink></li>
-        <li><NavLink to="/faqs" className={navLinkStyle}>FAQs</NavLink></li>
+        <li><NavLink to="/faq" className={navLinkStyle}>FAQs</NavLink></li>
     </>;
 
     const legal = <>
-        <li><NavLink to="/terms-of-use" className={navLinkStyle}>Terms of Service</NavLink></li>
+        <li><NavLink to="/terms-of-services" className={navLinkStyle}>Terms of Service</NavLink></li>
         <li><NavLink to="/privacy-policy" className={navLinkStyle}>Privacy Policy</NavLink></li>
         <li><NavLink to="/cookie-policy" className={navLinkStyle}>Cookie Policy</NavLink></li>
     </>;
