@@ -31,6 +31,7 @@ import TermsOfServices from '../pages/TermsOfServices/TermsOfServices';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import AboutUs from '../pages/AboutUs/AboutUs';
+import ContactUs from '../pages/ContactUs/ContactUs';
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
       {
         path: "about-us",
         Component: AboutUs
+      },
+      {
+        path: "contact-us",
+        Component: ContactUs
       },
     ]
   },
