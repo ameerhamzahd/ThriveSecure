@@ -32,6 +32,7 @@ import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import AboutUs from '../pages/AboutUs/AboutUs';
 import ContactUs from '../pages/ContactUs/ContactUs';
+import Forbidden from '../pages/Forbidden/Forbidden';
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +99,10 @@ export const router = createBrowserRouter([
       {
         path: "contact-us",
         Component: ContactUs
+      },
+      {
+        path: "forbidden",
+        Component: Forbidden,
       },
     ]
   },
