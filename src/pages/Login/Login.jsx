@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth/useAuth";
 import { toast, Bounce } from "react-toastify";
 import useAxios from "../../hooks/useAxios/useAxios";
 import { motion } from 'motion/react';
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const { googleLogin, loginUser, setUser } = useAuth();
@@ -71,6 +72,10 @@ const Login = () => {
 
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-30">
+            <Helmet>
+                <title>ThriveSecure | Login</title>
+            </Helmet>
+
             <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Login Form */}
                 <div className="w-full max-w-md mx-auto">

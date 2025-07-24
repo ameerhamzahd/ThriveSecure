@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "motion/react";
+import { Helmet } from "react-helmet-async";
 
 const ContactUs = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -11,7 +12,11 @@ const ContactUs = () => {
     };
 
     return (
-        <section className="max-w-11/12 mx-auto px-4 lg:px-0 pb-15 pt-30 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section className="max-w-11/12 mx-auto px-4 lg:px-0 pt-30 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <Helmet>
+                <title>ThriveSecure | Contact Us</title>
+            </Helmet>
+            
             {/* Text Section */}
             <motion.div
                 initial={{ opacity: 0, x: -30 }}

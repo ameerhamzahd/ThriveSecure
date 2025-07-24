@@ -6,6 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import { toast } from "react-toastify";
 import Pagination from "../../components/shared/Pagination/Pagination";
 import Loader from "../../components/shared/Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const Articles = () => {
     const axiosSecure = useAxiosSecure();
@@ -59,6 +60,10 @@ const Articles = () => {
             transition={{ duration: 0.6 }}
             className="min-h-screen bg-white pt-30"
         >
+            <Helmet>
+                <title>ThriveSecure | Articles</title>
+            </Helmet>
+
             <h2 className="text-3xl font-bold text-center text-blue-800 mb-8">Latest Articles</h2>
             {isLoading ? (
                 <Loader></Loader>

@@ -9,6 +9,7 @@ import Pagination from "../../../../components/shared/Pagination/Pagination";
 import useAuth from "../../../../hooks/useAuth/useAuth";
 import logo from "../../../../assets/logo.png";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyPolicies = () => {
     const axiosSecure = useAxiosSecure();
@@ -119,6 +120,10 @@ const MyPolicies = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <Helmet>
+                <title>Dashboard | My Policies</title>
+            </Helmet>
+            
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

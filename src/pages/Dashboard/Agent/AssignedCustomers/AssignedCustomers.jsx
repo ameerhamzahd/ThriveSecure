@@ -6,6 +6,7 @@ import { FaEye } from "react-icons/fa";
 import Pagination from "../../../../components/shared/Pagination/Pagination";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const AssignedCustomers = () => {
     const { user } = useAuth();
@@ -73,6 +74,10 @@ const AssignedCustomers = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <Helmet>
+                <title>Dashboard | Assigned Customers</title>
+            </Helmet>
+            
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

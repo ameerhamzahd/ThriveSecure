@@ -6,10 +6,15 @@ import PopularPolicies from '../../components/PopularPolicies/PopularPolicies';
 import CustomerReviews from '../../components/CustomerReviews/CustomerReviews';
 import LatestArticles from '../../components/LatestArticles/LatestArticles';
 import Agents from '../../components/Agents/Agents';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>ThriveSecure | Home</title>
+            </Helmet>
+
             <div>
                 <BannerSlider></BannerSlider>
             </div>

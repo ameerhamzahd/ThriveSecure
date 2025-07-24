@@ -2,10 +2,15 @@ import React from "react";
 import { motion } from "motion/react";
 import termsofservicesLottie from "../../assets/termsofservices.json"
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet-async";
 
 const TermsOfService = () => {
     return (
-        <section className="max-w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 px-4 lg:px-0 pb-15 pt-30 text-gray-800">
+        <section className="max-w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 px-4 lg:px-0 pt-30 text-gray-800">
+            <Helmet>
+                <title>ThriveSecure | Terms of Services</title>
+            </Helmet>
+            
             <div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

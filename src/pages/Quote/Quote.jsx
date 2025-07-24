@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { motion } from "motion/react";
 import quoteLottie from "../../assets/quote.json";
 import Lottie from 'lottie-react';
+import { Helmet } from 'react-helmet-async';
 
 const Quote = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -56,6 +57,10 @@ const Quote = () => {
 
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-28">
+            <Helmet>
+                <title>ThriveSecure | Quote</title>
+            </Helmet>
+            
             <div className="w-full max-w-11/12 grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* QuoteEstimator Form */}
                 <motion.div

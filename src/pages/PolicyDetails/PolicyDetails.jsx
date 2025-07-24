@@ -7,6 +7,7 @@ import {
     FaListUl, FaUserCheck, FaTags
 } from "react-icons/fa";
 import Loader from "../../components/shared/Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const PolicyDetails = () => {
     const { id } = useParams();
@@ -42,6 +43,10 @@ const PolicyDetails = () => {
             transition={{ duration: 0.5 }}
             className="min-h-screen max-w-11/12 mx-auto bg-white pt-30"
         >
+            <Helmet>
+                <title>ThriveSecure | Policy Details</title>
+            </Helmet>
+
             {/* Back Button */}
             <button
                 onClick={() => navigate("/all-policies")}

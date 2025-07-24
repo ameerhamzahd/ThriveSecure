@@ -9,6 +9,7 @@ import useAuth from "../../hooks/useAuth/useAuth";
 import StepProgress from "../../components/shared/StepProgress/StepProgress";
 import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Application = () => {
     const { id } = useParams();
@@ -80,7 +81,11 @@ const Application = () => {
 
     return (
         <div className="min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center pt-30 bg-white gap-10">
-            <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
+           <Helmet>
+                <title>ThriveSecure | Application</title>
+            </Helmet>
+           
+           <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Form */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

@@ -9,6 +9,7 @@ import { toast, Bounce } from "react-toastify";
 import useAxios from "../../hooks/useAxios/useAxios";
 import axios from "axios";
 import { motion } from 'motion/react';
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
     const { googleLogin, createUser, updateUser } = useAuth();
@@ -103,6 +104,10 @@ const Register = () => {
 
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-30">
+            <Helmet>
+                <title>ThriveSecure | Register</title>
+            </Helmet>
+            
             <div className="w-full max-w-11/12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 justify-items-center">
                 {/* Registration Form */}
                 <div className="w-full max-w-md mx-auto">

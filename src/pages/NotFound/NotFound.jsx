@@ -3,10 +3,15 @@ import React from 'react';
 import errorLottie from "../../assets/Error 404 Page.json";
 import { Link } from 'react-router';
 import { IoChevronBackOutline } from "react-icons/io5";
+import { Helmet } from 'react-helmet-async';
 
 const NotFound = () => {
     return (
         <div className='flex flex-col gap-3 justify-center items-center min-h-screen text-center lg:gap-6'>
+            <Helmet>
+                <title>ThriveSecure | Not Found</title>
+            </Helmet>
+            
             {/* Lottie Animation */}
             <div className="w-full flex justify-center items-center"
             >

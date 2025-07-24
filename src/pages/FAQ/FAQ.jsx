@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import faqLottie from "../../assets/faq.json"
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet-async";
 
 const faqData = [
     {
@@ -55,7 +56,11 @@ const FAQ = () => {
     };
 
     return (
-        <section className="max-w-11/12 mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 pt-30 pb-15 lg:px-0">
+        <section className="max-w-11/12 mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 pt-30 lg:px-0">
+            <Helmet>
+                <title>ThriveSecure | FAQs</title>
+            </Helmet>
+            
             <div>
                 <motion.div
                     className="text-center"

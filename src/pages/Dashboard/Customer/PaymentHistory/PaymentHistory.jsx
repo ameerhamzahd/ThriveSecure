@@ -6,6 +6,7 @@ import { FaCreditCard, FaCheckCircle, FaClock } from "react-icons/fa";
 import useAuth from "../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import Pagination from "../../../../components/shared/Pagination/Pagination"; // assuming you have this
+import { Helmet } from "react-helmet-async";
 
 const ProfileHistory = () => {
     const axiosSecure = useAxiosSecure();
@@ -35,6 +36,10 @@ const ProfileHistory = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <Helmet>
+                <title>Dashboard | Payment History</title>
+            </Helmet>
+            
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -9,6 +9,7 @@ import StepProgress from '../../../components/shared/StepProgress/StepProgress';
 import Loader from '../../../components/shared/Loader/Loader';
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../../hooks/useAxios/useAxios";
+import { Helmet } from 'react-helmet-async';
 
 const PolicyQuote = () => {
     const { id } = useParams();
@@ -105,7 +106,11 @@ const PolicyQuote = () => {
     }
 
     return (
-        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-28">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-30">
+            <Helmet>
+                <title>ThriveSecure | Policy Quote</title>
+            </Helmet>
+
             <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-10 justify-items-center">
                 <motion.div
                     initial={{ opacity: 0, x: -40 }}

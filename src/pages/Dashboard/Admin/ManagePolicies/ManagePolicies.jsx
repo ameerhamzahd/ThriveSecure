@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
 import Pagination from "../../../../components/shared/Pagination/Pagination";
 import PolicyForm from "./PolicyForm/PolicyForm";
+import { Helmet } from "react-helmet-async";
 
 const ManagePolicies = () => {
     const axiosSecure = useAxiosSecure();
@@ -66,6 +67,10 @@ const ManagePolicies = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <Helmet>
+                <title>Dashboard | Manage Policies</title>
+            </Helmet>
+            
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

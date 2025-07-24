@@ -14,7 +14,6 @@ import ManageApplications from '../pages/Dashboard/Admin/ManageApplications/Mana
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers';
 import ManagePolicies from '../pages/Dashboard/Admin/ManagePolicies/ManagePolicies';
 import ManageTransactions from '../pages/Dashboard/Admin/ManageTransactions/ManageTransactions';
-import ManageAgents from '../pages/Dashboard/Admin/ManageAgents/ManageAgents';
 import PolicyQuote from '../pages/Quote/PolicyQuote/PolicyQuote';
 import AllPolicies from '../pages/AllPolicies/AllPolicies';
 import PolicyDetails from '../pages/PolicyDetails/PolicyDetails';
@@ -133,10 +132,6 @@ export const router = createBrowserRouter([
       {
         path: "manage-transactions",
         Component: ManageTransactions
-      },
-      {
-        path: "manage-agents",
-        Component: ManageAgents
       },
       {
         path: "assigned-customers",

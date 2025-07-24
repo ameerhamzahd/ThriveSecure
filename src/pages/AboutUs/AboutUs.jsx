@@ -2,10 +2,15 @@ import React from "react";
 import { motion } from "motion/react";
 import Lottie from "lottie-react";
 import aboutusLottie from "../../assets/About us.json";
+import { Helmet } from "react-helmet-async";
 
 const AboutUs = () => {
     return (
-        <section className="max-w-11/12 mx-auto px-4 lg:px-0 pb-15 pt-30 text-gray-800 grid grid-cols-1 lg:grid-cols-2 items-center">
+        <section className="max-w-11/12 mx-auto px-4 lg:px-0 pt-30 text-gray-800 grid grid-cols-1 lg:grid-cols-2 items-center">
+            <Helmet>
+                <title>ThriveSecure | About Us</title>
+            </Helmet>
+            
             {/* Lottie Animation */}
             <div className="hidden w-full lg:flex justify-center items-center"
             >

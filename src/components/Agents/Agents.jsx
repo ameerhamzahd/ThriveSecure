@@ -19,7 +19,7 @@ const Agents = () => {
     });
 
     return (
-        <section className="py-15 lg:py-20 overflow-hidden relative">
+        <section className="pt-15 lg:pt-20 pb-5 overflow-hidden relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

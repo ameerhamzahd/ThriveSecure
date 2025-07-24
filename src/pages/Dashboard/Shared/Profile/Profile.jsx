@@ -8,6 +8,7 @@ import axios from "axios";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth/useAuth";
 import Loader from "../../../../components/shared/Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
     const axiosSecure = useAxiosSecure();
@@ -116,7 +117,7 @@ const Profile = () => {
     };
 
     return (
-        <section className="bg-gradient-to-br from-white to-blue-50 min-h-screen flex items-center justify-center">
+        <section className="bg-gray-50 min-h-screen flex items-center justify-center">
             {isLoading ? (
                 <Loader />
             ) : (
@@ -125,7 +126,7 @@ const Profile = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="bg-white shadow-2xl rounded-3xl max-w-md w-full p-8 border-t-4 border-blue-600"
+                    className="bg-white shadow-2xl rounded-3xl max-w-md w-full p-8"
                 >
                     <div className="flex flex-col items-center mb-6">
                         <div className="relative w-28 h-28">
@@ -169,7 +170,7 @@ const Profile = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting || updateProfile.isPending || uploading}
-                            className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+                            className="cursor-pointer w-full mt-4 bg-blue-800 text-white py-2 rounded-lg hover:opacity-75 transition disabled:opacity-50"
                         >
                             {updateProfile.isPending || isSubmitting || uploading ? "Saving..." : "Save Profile"}
                         </button>

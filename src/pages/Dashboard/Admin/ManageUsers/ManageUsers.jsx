@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
 import Pagination from "../../../../components/shared/Pagination/Pagination";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -51,6 +52,10 @@ const ManageUsers = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <Helmet>
+                <title>Dashboard | Manage Users</title>
+            </Helmet>
+
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

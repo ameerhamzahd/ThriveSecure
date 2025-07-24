@@ -30,7 +30,7 @@ const Footer = () => {
     </>;
 
     return (
-        <footer className="footer lg:footer-horizontal bg-gradient-to-br from-teal-200 via-teal-100 to-teal-50 backdrop-blur-lg text-base-content p-10 max-w-11/12 mx-auto mb-5 rounded-3xl">
+        <footer className="footer lg:footer-horizontal bg-gradient-to-br from-teal-200 via-teal-100 to-teal-50 backdrop-blur-lg text-base-content p-10 max-w-11/12 mx-auto mb-5 rounded-3xl mt-15 lg:mt-20">
             <aside>
                 <Link to="/" className="text-xl font-bold flex items-center gap-2">
                     <img className="w-10 h-10" src={logo} alt="Logo" />ThriveSecure

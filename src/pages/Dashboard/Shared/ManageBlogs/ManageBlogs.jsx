@@ -8,6 +8,7 @@ import useAuth from "../../../../hooks/useAuth/useAuth";
 import Pagination from "../../../../components/shared/Pagination/Pagination";
 import BlogForm from "./BlogForm/BlogForm";
 import useUserRole from "../../../../hooks/useUserRole/useUserRole";
+import { Helmet } from "react-helmet-async";
 
 const ManageBlogs = () => {
     const axiosSecure = useAxiosSecure();
@@ -51,6 +52,10 @@ const ManageBlogs = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <Helmet>
+                <title>Dashboard | Manage Blogs</title>
+            </Helmet>
+            
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

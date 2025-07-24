@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { Bounce, toast } from "react-toastify";
 import useAuth from "../../../../hooks/useAuth/useAuth";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const ClaimRequest = () => {
     const { user } = useAuth();
@@ -106,8 +107,12 @@ const ClaimRequest = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-white p-6"
+            className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6"
         >
+            <Helmet>
+                <title>Dashboard | Claim Request</title>
+            </Helmet>
+
             <div className="max-w-4xl w-full bg-white shadow-xl rounded-2xl p-6">
                 <h2 className="text-2xl font-bold text-blue-800 mb-4 text-center">Request a Claim</h2>
 

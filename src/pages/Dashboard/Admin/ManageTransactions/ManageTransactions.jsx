@@ -11,6 +11,7 @@ import {
     LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer
 } from "recharts";
 import CountUp from "react-countup";
+import { Helmet } from "react-helmet-async";
 
 const ManageTransactions = () => {
     const axiosSecure = useAxiosSecure();
@@ -58,6 +59,10 @@ const ManageTransactions = () => {
 
     return (
         <div className="min-h-screen p-6 bg-gray-50 flex flex-col items-center">
+            <Helmet>
+                <title>Dashboard | Manage Transactions</title>
+            </Helmet>
+            
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

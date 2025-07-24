@@ -20,7 +20,7 @@ const Navbar = () => {
         <li><NavLink to="/articles" className={navLinkStyle}>Articles</NavLink></li>
         <li><NavLink to="/faq" className={navLinkStyle}>FAQs</NavLink></li>
         {
-            user && <li><NavLink to="/dashboard" className={navLinkStyle}>Dashboard</NavLink></li>
+            user && <li><NavLink to="/dashboard/profile" className={navLinkStyle}>Dashboard</NavLink></li>
         }
     </>;
 
