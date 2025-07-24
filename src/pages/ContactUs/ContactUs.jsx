@@ -7,7 +7,6 @@ const ContactUs = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-        // Send data to Firebase, EmailJS, or your API endpoint here.
         reset();
     };
 
@@ -85,7 +84,7 @@ const ContactUs = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-800 to-accent text-white font-semibold hover:opacity-90 transition"
+                        className="w-full py-3 rounded-lg bg-blue-800 text-white font-semibold hover:opacity-90 transition"
                     >
                         Send Message
                     </button>

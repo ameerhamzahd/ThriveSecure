@@ -5,7 +5,7 @@ import Lottie from "lottie-react";
 
 const CookiePolicy = () => {
     return (
-        <section className="max-w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 lg:px-0 pb-15 pt-30 text-gray-800">
+        <section className="max-w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 px-4 lg:px-0 pb-15 pt-30 text-gray-800">
             <div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -112,13 +112,13 @@ const CookiePolicy = () => {
 
             {/* Lottie Animation */}
             <div className="hidden w-full lg:flex justify-center items-center"
-                >
-                    <Lottie
-                        style={{ width: "600px" }}
-                        animationData={cookiepolicyLottie}
-                        loop
-                    />
-                </div>
+            >
+                <Lottie
+                    style={{ width: "600px" }}
+                    animationData={cookiepolicyLottie}
+                    loop
+                />
+            </div>
         </section>
     );
 };
