@@ -65,8 +65,8 @@ Welcome to **ThriveSecure**, a secure, user-friendly digital platform for purcha
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/ameerhamzahd/thrivesecure.git
-    cd thrivesecure
+    git clone https://github.com/ameerhamzahd/ThriveSecure.git
+    cd ThriveSecure
     ```
 
 2. **Install dependencies:**

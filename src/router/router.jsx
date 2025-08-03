@@ -32,6 +32,7 @@ import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import AboutUs from '../pages/AboutUs/AboutUs';
 import ContactUs from '../pages/ContactUs/ContactUs';
 import Forbidden from '../pages/Forbidden/Forbidden';
+import PrivateRoutes from "../routes/PrivateRoutes/PrivateRoutes"
 
 export const router = createBrowserRouter([
   {
@@ -57,11 +58,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "policy-quote/:id",
-        Component: PolicyQuote
+        element: 
+        <PrivateRoutes>
+          <PolicyQuote></PolicyQuote>
+        </PrivateRoutes>
       },
       {
         path: "application/:id",
-        Component: Application
+        element: 
+        <PrivateRoutes>
+          <Application></Application>
+        </PrivateRoutes>
       },
       {
         path: "all-policies",
@@ -107,59 +114,101 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    Component: DashboardLayout,
+    element: 
+        <PrivateRoutes>
+          <DashboardLayout></DashboardLayout>
+        </PrivateRoutes>,
     children: [
       {
         index: true,
-        Component: Dashboard
+        element: 
+        <PrivateRoutes>
+          <Dashboard></Dashboard>
+        </PrivateRoutes>
       },
       {
         path: "payment/:id",
-        Component: PaymentGateway
+        element: 
+        <PrivateRoutes>
+          <PaymentGateway></PaymentGateway>
+        </PrivateRoutes>
       },
       {
         path: "manage-applications",
-        Component: ManageApplications
+        element: 
+        <PrivateRoutes>
+          <ManageApplications></ManageApplications>
+        </PrivateRoutes>
       },
       {
         path: "manage-users",
-        Component: ManageUsers
+        element: 
+        <PrivateRoutes>
+          <ManageUsers></ManageUsers>
+        </PrivateRoutes>
       },
       {
         path: "manage-policies",
-        Component: ManagePolicies
+        element: 
+        <PrivateRoutes>
+          <ManagePolicies></ManagePolicies>
+        </PrivateRoutes>
       },
       {
         path: "manage-transactions",
-        Component: ManageTransactions
+        element: 
+        <PrivateRoutes>
+          <ManageTransactions></ManageTransactions>
+        </PrivateRoutes>
       },
       {
         path: "assigned-customers",
-        Component: AssignedCustomers
+        element: 
+        <PrivateRoutes>
+          <AssignedCustomers></AssignedCustomers>
+        </PrivateRoutes>
       },
       {
         path: "policy-clearance",
-        Component: PolicyClearance
+        element: 
+        <PrivateRoutes>
+          <PolicyClearance></PolicyClearance>
+        </PrivateRoutes>
       },
       {
         path: "manage-blogs",
-        Component: ManageBlogs
+        element: 
+        <PrivateRoutes>
+          <ManageBlogs></ManageBlogs>
+        </PrivateRoutes>
       },
       {
         path: "my-policies",
-        Component: MyPolicies
+        element: 
+        <PrivateRoutes>
+          <MyPolicies></MyPolicies>
+        </PrivateRoutes>
       },
       {
         path: "payment-history",
-        Component: ProfileHistory
+        element: 
+        <PrivateRoutes>
+          <ProfileHistory></ProfileHistory>
+        </PrivateRoutes>
       },
       {
         path: "claim-request",
-        Component: ClaimRequest
+        element: 
+        <PrivateRoutes>
+          <ClaimRequest></ClaimRequest>
+        </PrivateRoutes>
       },
       {
         path: "profile",
-        Component: Profile
+        element: 
+        <PrivateRoutes>
+          <Profile></Profile>
+        </PrivateRoutes>
       },
     ]
   }
