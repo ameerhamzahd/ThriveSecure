@@ -4,15 +4,15 @@ Welcome to **ThriveSecure**, a secure, user-friendly digital platform for purcha
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-- 🛡️ Purchase life & health insurance policies easily
-- 🗂️ Manage, view, and track policies in a personal dashboard
-- 💳 Secure Stripe payment integration
-- 📊 Dynamic policy statistics and data visualization
-- 🔔 Real-time notifications for payment and policy updates
-- 👤 Secure login, registration & role-based dashboards
-- 📈 Admin, Agent & Customer analytics and management according their role
+- Purchase life & health insurance policies easily
+- Manage, view, and track policies in a personal dashboard
+- Secure Stripe payment integration
+- Dynamic policy statistics and data visualization
+- Real-time notifications for payment and policy updates
+- Secure login, registration & role-based dashboards
+- Admin, Agent & Customer analytics and management according their role
 
 ---
 
