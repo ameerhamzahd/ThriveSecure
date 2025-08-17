@@ -16,7 +16,7 @@ Welcome to **ThriveSecure**, a secure, user-friendly digital platform for purcha
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -29,7 +29,7 @@ Welcome to **ThriveSecure**, a secure, user-friendly digital platform for purcha
 
 ---
 
-## 📦 NPM Packages Used
+## NPM Packages Used
 
 ### Client Side
 
@@ -60,7 +60,7 @@ Welcome to **ThriveSecure**, a secure, user-friendly digital platform for purcha
 
 ---
 
-## 🛠️ Setup Instructions & Installation
+## Setup Instructions & Installation
 
 1. **Clone the repository:**
 
@@ -75,7 +75,7 @@ Welcome to **ThriveSecure**, a secure, user-friendly digital platform for purcha
     npm install
     ```
 
-    ⚠️ Ensure Tailwind CSS is initialized if not already:
+    Ensure Tailwind CSS is initialized if not already:
 
     ```bash
     npx tailwindcss init -p
@@ -119,7 +119,7 @@ Welcome to **ThriveSecure**, a secure, user-friendly digital platform for purcha
 
 ---
 
-## ⚛️ Fix Client-Side Routing (React Router)
+## Fix Client-Side Routing (React Router)
 
 If using React Router with Firebase Hosting, add a `_redirects` file in your `public/` folder:
 
@@ -128,7 +128,7 @@ If using React Router with Firebase Hosting, add a `_redirects` file in your `pu
 
 ---
 
-## 🚀 Deployment Steps to Firebase
+## Deployment Steps to Firebase
 
 1. **Login to Firebase CLI:**
 
@@ -163,18 +163,18 @@ If using React Router with Firebase Hosting, add a `_redirects` file in your `pu
 
 ---
 
-## 📬 Contact
+## Contact
 
 For issues or suggestions, please contact: ameerhamzah.daiyan@gmail.com
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
 ---
 
-## ✨ Acknowledgements
+## Acknowledgements
 
 Thanks to Firebase, Stripe, Tailwind CSS, and the React ecosystem for powering this project.
