@@ -3,7 +3,8 @@ import useAuth from '../../../hooks/useAuth/useAuth'
 import { toast, Bounce } from 'react-toastify';
 import { Link, NavLink } from 'react-router';
 import logo from '../../../assets/logo.png'
-import { TbLogin2, TbLogout2 } from 'react-icons/tb';
+import { TbLogout2 } from 'react-icons/tb';
+import { FaRegUser } from "react-icons/fa";
 import userAvatar from '../../../assets/user.png'
 
 const Navbar = () => {
@@ -76,40 +77,26 @@ const Navbar = () => {
                         <div className="navbar-end">
                             {
                                 user ? (<>
-                                    {/* {
-                                    <input type="checkbox"
-                                        onChange={handleToggleTheme}
-                                        checked={theme === "dark"}
-                                        className="toggle theme-controller" />
-                                } */}
-
                                     <div className="relative px-2">
                                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                             <div className="w-10 h-10 rounded-full ring ring-blue-800 ring-offset-base-100 ring-offset-2">
                                                 <Link to="/dashboard/profile">
-                                                <img src={user?.photoURL || userAvatar} alt="User Avatar" />
+                                                    <img src={user?.photoURL || userAvatar} alt="User Avatar" />
                                                 </Link>
                                             </div>
                                         </label>
                                     </div>
                                     <div className='gap-3 justify-center items-center px-2 md:flex'>
                                         <Link onClick={handleLogout} className="flex gap-2 items-center px-6 bg-transparent btn hover:border-blue-800">
-                                        <TbLogout2 size={20} />Logout
+                                            <TbLogout2 size={20} />Logout
                                         </Link>
                                     </div>
                                 </>
                                 ) : (
                                     <div className='flex justify-center items-center'>
-                                        {/* {
-                                        <input type="checkbox"
-                                            onChange={handleToggleTheme}
-                                            checked={theme === "dark"}
-                                            className="toggle theme-controller" />
-                                    } */}
-
                                         <div className='gap-3 justify-center items-center px-2 md:flex'>
                                             <Link to="/login" className="flex gap-2 items-center px-6 bg-transparent btn hover:border-blue-800">
-                                                <TbLogin2 size={20} /> Login
+                                                <FaRegUser size={15} /> Login
                                             </Link>
                                         </div>
                                     </div>
